@@ -1,0 +1,1728 @@
+[
+  {
+    "id": 1,
+    "title": "C++ Fundamentals & Compilation",
+    "concepts": [
+      {
+        "name": "OOP\n Gavrilut Dragos\n\nCourse 1\n Rev 4\n\nSummary",
+        "explanation": "\uf075 Administrative \uf075 Glossary \uf075 Compilers \uf075 OS architecture \uf075 C++ history and revisions \uf075 From C to C++ \uf075 Classes \uf075 Classes \u2013 Data Members",
+        "code_examples": [],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Administrative\n\nAdministrative",
+        "explanation": "\uf075 Site: https://gdt050579.github.io/poo_course_fii/ \uf075 Final grade for the OOP exam: \u25aa First lab examination (week 8) \u2192 30 points \u25aa Second lab examination (week 14 or 15) \u2192 30 points \u25aa Course examination \u2192 30 points \u25aa Lab activity  \u2192 up to 1 point for each laboratory and no more than 10 points in total \uf075  Minimum requirements to pass OOP exam: \uf075 45 points from all tests that must reflect",
+        "code_examples": [],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Glossary\n\nGlossary",
+        "explanation": "\uf075 API \u2192 Application Program Interface \uf075 Library \u2013 a set o functions that can be use by multiple programs at the same  time (for example math functions like cos, sin, tan, etc) \uf075 GUI \u2192 Graphic User Interface",
+        "code_examples": [],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Glossary",
+        "explanation": "\uf075 Compiler \u2013 a program that translates from a source code (a readable code)  into a machine code (binary code that is understand by a specific architecture  \u2013 x86, x64, ARM, etc) \uf075 A compiler can be: \uf075 Native \u2013 the result is a native code application for the specific architecture \uf075 Interpreted \u2013 the result is a code (usually called byte-code) that requires an  interpreter to be executed. Its portability depends on the portability of its  interpreter",
+        "code_examples": [],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Interpreted JIT Native",
+        "explanation": "Faster, Low Level Portable, High Level",
+        "code_examples": [],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Executable\n\nGlossary",
+        "explanation": "\uf075 Linker \u2013 a program that merges the object files  obtained from the compiler  phase into a single executable \uf075 It also merges various libraries to the executable that is being create. \uf075 Libraries can be linked in the following ways: \uf075 Dynamically: When application is executed, the operating system links it with the  necessary libraries (if available). If not, an execution error may appear. \uf075 Static: The resulted executable code contains the code from the libraries that it  uses as well",
+        "code_examples": [],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "OS Architecture\n\nOS Architecture",
+        "explanation": "\uf075 What happens when the OS executes a native application that is obtain from a  compiler such as C++ ? \uf075 Let\u2019s consider the following C/C++ file that is compile into an executable  application: bool IsNumberOdd(int n) {     return ((n % 2)==0); void main(void) {   for (poz=0,i=1;poz<100;i++) {",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\n#include <stdio.h>\nint vector[100];\n\nbool IsNumberOdd(int n) {\n    return ((n % 2)==0);\n}\nvoid main(void) {\n  int poz,i;\n  for (poz=0,i=1;poz<100;i++) {\n    if (IsNumberOdd(i)) {\n      vector[poz++] = i;\n    }\n  }\n  printf(\"Found 100 odd numbers !\");\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "OS Architecture",
+        "explanation": "\uf075 Let\u2019s assume that we compile \u201cApp.cpp\u201d on a Windows system using Microsoft  C++ compiler (cl.exe). \uf075 App.cpp is compiled using dynamic linkage for libraries. App.cpp App.obj App.exe kernel32.lib",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\u201d on a Windows system using Microsoft \nC++ compiler (cl.exe).\n\n\uf075"
+          },
+          {
+            "title": "Example 2",
+            "code": "App.cpp is compiled using dynamic linkage for libraries.\n\nApp.cpp App.obj App.exe\n\nmsvcrt.lib\n\nkernel32.lib\n\nntdll.lib"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "OS Architecture",
+        "explanation": "\uf075 Let\u2019s assume that we compile \u201cApp.cpp\u201d on a Windows system using Microsoft  C++ compiler (cl.exe). \uf075 App.cpp is compiled using dynamic linkage for libraries. App.cpp App.obj App.exe kernel32.lib  \u201cprintf\u201d function tells the  linker to use the CRT library  (where the code for this",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\u201d on a Windows system using Microsoft \nC++ compiler (cl.exe).\n\n\uf075"
+          },
+          {
+            "title": "Example 2",
+            "code": "App.cpp is compiled using dynamic linkage for libraries.\n\nApp.cpp App.obj App.exe\n\nmsvcrt.lib\n\nkernel32.lib\n\nntdll.lib\n \u201cprintf\u201d function tells the \nlinker to use the CRT library \n(where the code for this \nfunction is located). msvcrt.lib \nis the Windows version of CRT \n(C-RunTime) library."
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "OS Architecture",
+        "explanation": "\uf075 Let\u2019s assume that we compile \u201cApp.cpp\u201d on a Windows system using Microsoft  C++ compiler (cl.exe). \uf075 App.cpp is compiled using dynamic linkage for libraries. App.cpp App.obj App.exe kernel32.lib",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\u201d on a Windows system using Microsoft \nC++ compiler (cl.exe).\n\n\uf075"
+          },
+          {
+            "title": "Example 2",
+            "code": "App.cpp is compiled using dynamic linkage for libraries.\n\nApp.cpp App.obj App.exe\n\nmsvcrt.lib\n\nkernel32.lib\n\nntdll.lib"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Pointers & References",
+    "concepts": [
+      {
+        "name": "OOP\n Gavrilut Dragos\n\nCourse 2\n Rev 3\n\nSummary",
+        "explanation": "\uf075 Pointers and References \uf075 Method overloading \uf075 NULL pointer \uf075 \u201cconst\u201d specifier \uf075 \u201cfriend\u201d specifier",
+        "code_examples": [],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "App-Pointer App-Reference",
+        "explanation": "void SetInt(int *i) void main()  void SetInt(int &i) void main() App-Pointer (asm \u2013 SetInt) App-Reference (asm \u2013 SetInt)   push    ebp   mov    ebp,esp   mov    eax,[ebp+8]",
+        "code_examples": [
+          {
+            "title": "Pointer vs Reference",
+            "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 10;\n    \n    // Pointer example\n    int* ptr = &x;\n    cout << \"Pointer: \" << *ptr << endl;\n    \n    // Reference example\n    int& ref = x;\n    cout << \"Reference: \" << ref << endl;\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "struct Date { \n    int X;\n};\nvoid SetInt(Date &d) {\n    // TODO: Set d.X to 5\n    d.X = 5;\n}",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Date d;\n    SetInt(d);\n    if (d.X == 5) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Pointers and References",
+        "explanation": "\uf075 The resulted code is identical (both the \u201cPointer\u201d and \u201cReference\u201d program  will link into the same assembler code. \uf075 However, from the programmer point of view, using a reference fixes some  possible problems (perhaps the most know one is that one does not need to  use the \u201c->\u201d operator \u2013 instead the \u201c.\u201d operator can be used). Another  important one is that a check for NULL pointers is no longer required.",
+        "code_examples": [
+          {
+            "title": "Pointer and Reference Basics",
+            "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int value = 42;\n    \n    // Pointer: can be null, needs dereferencing\n    int* ptr = nullptr;\n    ptr = &value;\n    cout << \"*ptr = \" << *ptr << endl;\n    \n    // Reference: cannot be null, no dereferencing needed\n    int& ref = value;\n    cout << \"ref = \" << ref << endl;\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Compare pointer and reference semantics\nint i = 10, j = 20;\nint* p = &i;\nint& refI = i;",
+          "test_harness": "#include <iostream>\nusing namespace std;\nint main() {\n    int i = 10, j = 20;\n    int* p = &i;\n    int& refI = i;\n    \n    if (*p == 10 && refI == 10) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Pointer Reference\n\nstruct Date",
+        "explanation": "void SetInt(Date *d)  struct Date void SetInt(Date &d)",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "struct Date\n{\n      int X;\n}\nvoid SetInt(Date &d)\n{\n      d.X = 5;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "struct Date { int X; };\nvoid SetInt(Date &d) {\n    // TODO: Set d.X to 5\n    d.X = 5;\n}",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Date d;\n    SetInt(d);\n    if (d.X == 5) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Pointers and References",
+        "explanation": "\uf075 References and pointers are created in the following manner: \uf075 The difference is that pointers can remain uninitialized. This forces the programmer to initialize a reference.  It also guarantees that a reference points to a valid memory location.",
+        "code_examples": [
+          {
+            "title": "Pointer vs Reference Behavior",
+            "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a = 5, b = 10;\n    \n    // Pointers can change what they point to\n    int* p = &a;\n    cout << \"p points to a: \" << *p << endl;\n    p = &b;\n    cout << \"p now points to b: \" << *p << endl;\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Pointer arithmetic allows operations like p++\nint i = 10, j = 30;\nint* p = &i;\n// p++ moves pointer (references don't support this)",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int i = 10;\n    int* p = &i;\n    \n    if (*p == 10) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Pointer Reference",
+        "explanation": "uninitialized reference",
+        "code_examples": [],
+        "fill_in": {
+          "starter_code": "// TODO: References cannot be changed after initialization\nint i = 10, j = 20;\nint& refI = i;\n// refI = j; // Compile error - trying to rebind",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int i = 10, j = 20;\n    int& refI = i;\n    \n    if (refI == 10) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Pointers and References",
+        "explanation": "\uf075 A pointer value can be changed (that is a pointer can point to different  memory addresses). A reference can only point to a variable and once it is  initialize the memory address where it points to can not be changed. \uf075 A pointer can have the value NULL.",
+        "code_examples": [
+          {
+            "title": "Pointer Arithmetic",
+            "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int arr[] = {10, 20, 30, 40, 50};\n    int* p = arr;\n    \n    cout << \"Array via pointer:\" << endl;\n    for (int i = 0; i < 5; i++) {\n        cout << \"*(p+\" << i << \") = \" << *(p + i) << endl;\n    }\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Demonstrate pointer arithmetic\nint i = 10, j = 30;\nint* p = &i;\n// Pointers support arithmetic, references don't",
+          "test_harness": "#include <iostream>\nusing namespace std;\nint main() {\n    int i = 10, j = 30;\n    int* p = &i;\n    \n    if (*p == 10) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Pointer Reference",
+        "explanation": "&refI = j; Compiler error \u2013 trying  to change a reference  that was already  initialized.",
+        "code_examples": [],
+        "fill_in": {
+          "starter_code": "// TODO: Reference arithmetic is not allowed\nint i = 10, j = 30;\nint& ref = i;\n// ref++; // Compile error",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int i = 10, j = 30;\n    int& ref = i;\n    \n    if (ref == 10) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Pointers and References",
+        "explanation": "\uf075 Pointers accept certain arithmetic operations (+, - , ++, etc). This is not valid  for references. \uf075 In case of pointers, variable \u201ci\u201d and \u201cj\u201d are allocated consecutively on the  stack. The operation \u201cp++\u201d moves the pointer p from the memory address of  the variable \u201ci\u201d to the memory address of the variable \u201cj\u201d. At the end of the  execution \u201cj\u201d will have the value 30.",
+        "code_examples": [
+          {
+            "title": "Reference Limitations",
+            "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 10;\n    int& ref = x;\n    \n    // References don't support arithmetic\n    cout << \"ref = \" << ref << endl;\n    \n    // ref++; // This would increment x, not move the reference\n    x++;\n    cout << \"After x++: ref = \" << ref << endl;\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Demonstrate pointer arithmetic\nint i = 10, j = 30;\nint* p = &i;\n// p++; would move to j",
+          "test_harness": "#include <iostream>\nusing namespace std;\nint main() {\n    int i = 10, j = 30;\n    int* p = &i;\n    \n    if (*p == 10) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Pointer Reference",
+        "explanation": "(&refI)++; Compile error",
+        "code_examples": [],
+        "fill_in": {
+          "starter_code": "// TODO: Demonstrate reference cannot be incremented\nint i = 10;\nint& ref = i;\n// Cannot do: (&ref)++",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int i = 10;\n    int& ref = i;\n    \n    if (ref == 10) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Constructors & Initialization",
+    "concepts": [
+      {
+        "name": "OOP\n Gavrilut Dragos\n\nCourse 3Summary",
+        "explanation": "\uf075 Initialization lists (recap) \uf075 Constructors \uf075 Const & Reference data members \uf075 Delegating constructor \uf075 Initialization lists for classes \uf075 Value Types \uf075 Copy & Move Constructors \uf075 Constrains",
+        "code_examples": [],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Initialization lists\n(recap)\n\nInitialization lists",
+        "explanation": "\uf075 \u201c{\u201c and \u201c}\u201d can now be used to initialize values. This method is called: \u201cInitialization lists\u201d \uf075 In all of these cases \u201cx\u201d, \u201cy\u201d and \u201cz\u201d will have a value of 5. void main() { int x = 5;",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nvoid main()\n{ int x = 5;\nint y = { 5 };\nint z = int { 5 };\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Assembly code generated",
+        "explanation": "mov dword ptr [x],5   mov dword ptr [y],5   mov dword ptr [z],5",
+        "code_examples": [
+          {
+            "title": "Assembly Code Example",
+            "code": "#include <iostream>\nusing namespace std;\n\nclass Point {\npublic:\n    int x, y;\n    Point(int a, int b) : x(a), y(b) {}\n};\n\nint main() {\n    Point p(3, 4);\n    cout << \"Point: (\" << p.x << \", \" << p.y << \")\" << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Initialization lists",
+        "explanation": "\uf075 \u201c{\u201c and \u201c}\u201d can be used for array initialization as well: \uf075 If possible, the compiler tries to deduce the size of the array from the  declaration. If the initialization list is too small, the rest of the array will be  filled with the default value for that type (in case of \u201cint\u201d with value 0 \u2192 values that are grayed in the table). void main() { int x[3] = { 1, 2, 3 };",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nvoid main()\n{ int x[3] = { 1, 2, 3 };\nint y[] = { 4, 5, 6 };\nint z[10] = {  };\nint t[10] = { 1, 2 };\nint u[10] = { 15 };\nint v[] = { 100 };\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Variable Values",
+        "explanation": "X [3] [1, 2, 3] Y [3] [4, 5, 6] Z [10] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] T [10] [1, 2, 0, 0, 0, 0, 0, 0, 0, 0] U [10] [15, 0, 0, 0, 0, 0, 0, 0, 0, 0] V [1] [100]",
+        "code_examples": [
+          {
+            "title": "Variable Values",
+            "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int x[3] = {1, 2, 3};\n    int y[5] = {10, 20};  // Rest filled with 0\n    \n    cout << \"x: \";\n    for (int i = 0; i < 3; i++) cout << x[i] << \" \";\n    cout << endl;\n    \n    cout << \"y: \";\n    for (int i = 0; i < 5; i++) cout << y[i] << \" \";\n    cout << endl;\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Initialization lists",
+        "explanation": "\uf075 \u201c{\u201c and \u201c}\u201d can be used to initialize a matrix as well. \uf075 However, only the first dimension of the matrix can be left unknown. The  following code will not compile as the compiler can not deduce the size of the  void main() { int x[][3] = { { 1, 2, 3 }, { 4, 5, 6 } }; void main() { int x[][] = { { 1, 2, 3 }, { 4, 5, 6 } }; error C2087: 'x': missing subscript",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nvoid main()\n{ int x[][3] = { { 1, 2, 3 }, { 4, 5, 6 } };\nint y[2][3] = { { 1, 2, 3 }, { 4, 5, 6 } };\n}\n\nApp.cpp\n\nvoid main()\n{ int x[][] = { { 1, 2, 3 }, { 4, 5, 6 } };\n}\nerror C2087: 'x': missing subscript\nerror C2078: too many initializers"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Initialization lists",
+        "explanation": "\uf075 Initialization lists can also be used when creating a pointer: void main() call operator new mov         dword ptr [ebp-0D4h],eax cmp         dword ptr [ebp-0D4h],0   je          _error_allocate_memory_ mov         eax,dword ptr [ebp-0D4h]    mov         dword ptr [eax],1",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nvoid main()\n{\n  int *x = new int[3] {1, 2, 3};\n} push 0Ch  \ncall operator new\nadd esp,4  \n\nmov         dword ptr [ebp-0D4h],eax\ncmp         dword ptr [ebp-0D4h],0  \nje          _error_allocate_memory_\n\nmov         eax,dword ptr [ebp-0D4h]  \n mov         dword ptr [eax],1  \nmov         ecx,dword ptr [ebp-0D4h]  \nmov         dword ptr [ecx+4],2  \nmov         edx,dword ptr [ebp-0D4h]  \nmov         dword ptr [edx+8],3"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Constructors\n\nConstructors",
+        "explanation": "\uf075 A constructor is a type-less function that is called whenever a class is created. \uf075 A class may contain multiple constructors (with different initialization  parameters) \uf075 A class does not need to have a constructor. However, if it has at least one,  then it\u2019s initialization should be based on that constructor parameters. \uf075 If one class contains several member data that have their own constructors,  those constructors will be called in the same order of their declaration.  \uf075 A constructor can not be static or constant",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class is created.\n\n\uf075"
+          },
+          {
+            "title": "Example 2",
+            "code": "class may contain multiple constructors (with different initialization \nparameters)\n\n\uf075"
+          },
+          {
+            "title": "Example 3",
+            "code": "class does not need to have a constructor. However, if it has at least one, \nthen it\u2019s initialization should be based on that constructor parameters.\n\n\uf075"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Box {\npublic:\n    int width, height;\n    // TODO: Add constructor to initialize width and height\n    Box(int w, int h) : width(w), height(h) {}\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Box b(5, 10);\n    if (b.width == 5 && b.height == 10) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Constructors",
+        "explanation": "\uf075 The constructor is defined as a function with the same name as the class  and no return value \uf075 A class : o May have NO constructors o May have only one constructor o May have multiple constructors o May have constructors that are not public   MyClass ();",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class \nand no return value\n\n\uf075"
+          },
+          {
+            "title": "Example 2",
+            "code": "App.cpp\n\nclass MyClass\n{\n  int x;\npublic:\n};\n App.cpp\n\nclass MyClass\n{\n  int x;\npublic:\n  MyClass ();\n};\n App.cpp\n\nclass MyClass\n{\n  int x;\npublic:\n  MyClass ();\n  MyClass (int value);\n  MyClass (float value);\n};\n App.cpp\n\nclass MyClass\n{\n  int x;\nprivate:\n  MyClass ();\n};"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Box {\npublic:\n    int width, height;\n    // TODO: Add constructor to initialize width and height\n    Box(int w, int h) : width(w), height(h) {}\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Box b(5, 10);\n    if (b.width == 5 && b.height == 10) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Type of constructors",
+        "explanation": "Constructors: \uf075 Default constructor (without any parameters) \uf075 Copy constructor \uf075 Move constructor A class can have none, one , some or all of these types of constructors.   MyClass ();   MyClass (const MyClass & objToCopyFrom);   MyClass (const MyClass && objToMoveFrom);",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class can have none, one , some or all of these types of constructors.\n\nApp.cpp\n\nclass MyClass\n{\n  int x;\npublic:\n  MyClass ();\n\n  MyClass (const MyClass & objToCopyFrom);\n\n  MyClass (const MyClass && objToMoveFrom);\n\n};"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Box {\npublic:\n    int width, height;\n    // TODO: Add constructor to initialize width and height\n    Box(int w, int h) : width(w), height(h) {}\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Box b(5, 10);\n    if (b.width == 5 && b.height == 10) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Destructors & Operators",
+    "concepts": [
+      {
+        "name": "OOP\n Gavrilut Dragos\n\nCourse 4Summary",
+        "explanation": "\uf075 Destructor \uf075 C/C++ operators \uf075 Operators for classes \uf075 Operations with Objects",
+        "code_examples": [
+          {
+            "title": "Course Summary",
+            "code": "#include <iostream>\nusing namespace std;\n\nclass Resource {\npublic:\n    int* data;\n    Resource() { data = new int(100); }\n    ~Resource() { delete data; }\n};\n\nint main() {\n    Resource r;\n    cout << \"Resource data: \" << *r.data << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Destructor\n\nDestructor",
+        "explanation": "\uf075 A destructor function is called whenever we want to free the memory that an  object occupies. \uf075 A destructor (if exists) is only one and has no parameters. \uf075 A destructor can not be static \uf075 A destructor can have different access modifiers (public/private/protected). Date::Date() : x(100) { ... } Date::~Date() { ... } void main()",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nclass Date\n{\nprivate:\nint x;\npublic:\nDate();\n~Date();\n};\nDate::Date() : x(100) { ... }\nDate::~Date() { ... }\n\nvoid main()\n{ Date d;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Memory {\npublic:\n    int* data;\n    Memory() { data = new int(100); }\n    // TODO: Add destructor to free memory\n    ~Memory() { delete data; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Memory m;\n    if (*m.data == 100) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Destructor",
+        "explanation": "\uf075 The most common usage of the destructor is to deallocate the memory that  has been allocated within the constructor or other functions. { char * text; String(const char * s) { text = new char[strlen(s) + 1]; memcpy(text, s, strlen(s) + 1); { delete text; text = nullptr;",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nclass String\n{ char * text;\npublic:\nString(const char * s)\n{ text = new char[strlen(s) + 1];\nmemcpy(text, s, strlen(s) + 1);\n}\n~String()\n{ delete text;\ntext = nullptr;\n}\n};\n\nvoid main()\n{ String * s = new String(\"C++\");\n// some operations\ndelete s;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Memory {\npublic:\n    int* data;\n    Memory() { data = new int(100); }\n    // TODO: Add destructor to free memory\n    ~Memory() { delete data; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Memory m;\n    if (*m.data == 100) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Destructor",
+        "explanation": "\uf075 This code will not compile. The destructor of class Date is private. Date::Date() : x(100) { ... } Date::~Date() { ... } void main()  error C2248: 'Date::~Date': cannot access private member  declared in class 'Date' note: compiler has generated 'Date::~Date' here note: see declaration of 'Date''",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class Date is private.\n\nApp.cpp\n\nclass Date\n{\nprivate:\nint x;\npublic:\nDate();\nprivate:\n~Date();\n};\nDate::Date() : x(100) { ... }\nDate::~Date() { ... }\n\nvoid main()\n{ Date d;\n}\n error C2248: 'Date::~Date': cannot access private member \ndeclared in class 'Date'\nnote: compiler has generated 'Date::~Date' here\nnote: see declaration of 'Date''"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Memory {\npublic:\n    int* data;\n    Memory() { data = new int(100); }\n    // TODO: Add destructor to free memory\n    ~Memory() { delete data; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Memory m;\n    if (*m.data == 100) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Destructor",
+        "explanation": "\uf075 This code will compile \u2013 because the destructor will (even if private) is not be  called (the object is created in the heap memory and it is never deallocated). Date::Date() : x(100) { ... } Date::~Date() { ... } void main()   Date *d = new Date();",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nclass Date\n{\nprivate:\n  int x;\npublic:\n  Date();\nprivate:\n  ~Date();\n};\nDate::Date() : x(100) { ... }\nDate::~Date() { ... }\n\nvoid main()\n{\n  Date *d = new Date();\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Memory {\npublic:\n    int* data;\n    Memory() { data = new int(100); }\n    // TODO: Add destructor to free memory\n    ~Memory() { delete data; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Memory m;\n    if (*m.data == 100) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Destructor",
+        "explanation": "\uf075 This code will not compile because \u201cdelete d\u201d call will attempt to use a  private destructor. Date::Date() : x(100) { ... } Date::~Date() { ... } void main()   Date *d = new Date();  error C2248: 'Date::~Date': cannot access private member  declared in class 'Date'",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nclass Date\n{\nprivate:\n  int x;\npublic:\n  Date();\nprivate:\n  ~Date();\n};\nDate::Date() : x(100) { ... }\nDate::~Date() { ... }\n\nvoid main()\n{\n  Date *d = new Date();\n      delete d;\n}\n error C2248: 'Date::~Date': cannot access private member \ndeclared in class 'Date'\nnote: compiler has generated 'Date::~Date' here\nnote: see declaration of 'Date''"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Memory {\npublic:\n    int* data;\n    Memory() { data = new int(100); }\n    // TODO: Add destructor to free memory\n    ~Memory() { delete data; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Memory m;\n    if (*m.data == 100) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Destructor",
+        "explanation": "\uf075 This code will compile. The destructor is private , but it can be access by a  method from its class (In this case DestroyData).       static void DestroyData(Date *d); Date::Date() : x(100) { ... } Date::~Date() { ... } void Date::DestroyData(Date *d) void main()   Date *d = new Date();",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nclass Date\n{\nprivate:\n  int x;\npublic:\n  Date();\n      static void DestroyData(Date *d);\nprivate:\n  ~Date();\n};\nDate::Date() : x(100) { ... }\nDate::~Date() { ... }\nvoid Date::DestroyData(Date *d)\n{\n     delete d;\n}\nvoid main()\n{\n  Date *d = new Date();\n      Date::DestroyData(d);\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Memory {\npublic:\n    int* data;\n    Memory() { data = new int(100); }\n    // TODO: Add destructor to free memory\n    ~Memory() { delete data; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Memory m;\n    if (*m.data == 100) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Destructor",
+        "explanation": "Let's consider the following class: The destructor is called when: A. When program ends, for every global variable B. When a function/method ends for every local variable C. When the execution exists a scope (for variable defined within a specific scope) D. When the delete operator is called over a heap allocated instance     ~Date() { printf(\"dtor was called \\n\"); }    for (int tr=0;tr<10;tr++) {",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nclass Date {\npublic:\n    ~Date() { printf(\"dtor was called \\n\"); }\n};\n\nDate d;\nint main() { return 0; }\n\nint main() {\n   Date d;\n   return 0; \n}\n\nint main() {\n   for (int tr=0;tr<10;tr++) {\n      Date d;\n   }\n   return 0; \n}\n\nint main() {\n   Date *d = new Date();\n   delete d;\n   return 0; \n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Memory {\npublic:\n    int* data;\n    Memory() { data = new int(100); }\n    // TODO: Add destructor to free memory\n    ~Memory() { delete data; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Memory m;\n    if (*m.data == 100) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Destructor",
+        "explanation": "\uf075 Objects are destroyed in the reverse order of their creation (similar to the  way a stack works \u2192 first created is the last destroyed).     ~Tree() { printf(\"dtor: Tree\\n\"); }     ~Car() { printf(\"dtor: Car\\n\"); }     ~Animal() { printf(\"dtor: Animal\\n\"); }     ~Date() { printf(\"dtor: Date\\n\"); } void main()  dtor: Animal",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nclass Tree {\npublic:\n    ~Tree() { printf(\"dtor: Tree\\n\"); }\n};\nclass Car {\npublic:\n    ~Car() { printf(\"dtor: Car\\n\"); }\n};\nclass Animal {\npublic:\n    ~Animal() { printf(\"dtor: Animal\\n\"); }\n};\nclass Date \n{\n    Tree t;\n    Car c;\n    Animal a;\npublic:\n    ~Date() { printf(\"dtor: Date\\n\"); }\n};\nvoid main() \n{ \n    Date d;\n}\n Outputs:\ndtor: Date\ndtor: Animal\ndtor: Car\ndtor: Tree"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Memory {\npublic:\n    int* data;\n    Memory() { data = new int(100); }\n    // TODO: Add destructor to free memory\n    ~Memory() { delete data; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Memory m;\n    if (*m.data == 100) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Destructor",
+        "explanation": "\uf075 Objects are destroyed in the reverse order of their creation (similar to the  way a stack works \u2192 first created is the last destroyed).     ~Tree() { printf(\"dtor: Tree\\n\"); }     ~Car() { printf(\"dtor: Car\\n\"); }     ~Animal() { printf(\"dtor: Animal\\n\"); }     ~Date() { printf(\"dtor: Date\\n\"); } void main()  dtor: Animal",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nclass Tree {\npublic:\n    ~Tree() { printf(\"dtor: Tree\\n\"); }\n};\nclass Car {\npublic:\n    ~Car() { printf(\"dtor: Car\\n\"); }\n};\nclass Animal {\npublic:\n    ~Animal() { printf(\"dtor: Animal\\n\"); }\n};\nclass Date \n{\n    Tree t;\n    Car c;\n    Animal a;\npublic:\n    ~Date() { printf(\"dtor: Date\\n\"); }\n};\nvoid main() \n{ \n    Date d;\n}\n Outputs:\ndtor: Date\ndtor: Animal\ndtor: Car\ndtor: Tree\n\nmov         dword ptr [this],ecx  \npush        offset string \"dtor: Date\\n\"  \ncall        _printf   \nadd         esp,4  \n\nmov         ecx,dword ptr [this]  \nadd         ecx,2  \ncall        Animal::~Animal   \n\nmov         ecx,dword ptr [this]  \nadd         ecx,1  \ncall        Car::~Car   \n\nmov         ecx,dword ptr [this]  \ncall        Tree::~Tree"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Memory {\npublic:\n    int* data;\n    Memory() { data = new int(100); }\n    // TODO: Add destructor to free memory\n    ~Memory() { delete data; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Memory m;\n    if (*m.data == 100) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Inheritance & Polymorphism",
+    "concepts": [
+      {
+        "name": "OOP\n Gavrilut Dragos\n\nCourse 5Summary",
+        "explanation": "\uf075 Inheritance \uf075 Virtual methods \uf075 How virtual methods are modeled by C++ compiler \uf075 Covariance \uf075 Abstract classes (Interfaces) \uf075 Memory alignment in case of inheritance",
+        "code_examples": [
+          {
+            "title": "Inheritance Basics",
+            "code": "#include <iostream>\nusing namespace std;\n\nclass Animal {\npublic:\n    virtual void speak() = 0;\n    virtual ~Animal() {}\n};\n\nclass Dog : public Animal {\npublic:\n    void speak() { cout << \"Woof!\" << endl; }\n};\n\nint main() {\n    Dog d;\n    d.speak();\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Inheritance\n\nInheritance",
+        "explanation": "\uf075 Inheritance is a process that transfer class proprieties (methods and  members) from one class (often called the base class to another that inherits  the base class \u2013 called derived class). The derive class may extend the base  \uf075 Such an example will be the class Automobile, where we can define the  following properties: \uf075 Number of doors \uf075 Number of wheels \uf075 From this class we can derive a particularization of the Automobile class (for",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class proprieties (methods and \nmembers) from one class (often called the base class to another that inherits \nthe base class \u2013 called derived class). The derive class may extend the base \nclass by adding additional methods and/or members.\n\n\uf075"
+          },
+          {
+            "title": "Example 2",
+            "code": "class Automobile, where we can define the \nfollowing properties:\n\n\uf075"
+          },
+          {
+            "title": "Example 3",
+            "code": "class we can derive a particularization of the Automobile class (for \nexample electrical machines) that besides the properties of the base class \n(doors, wheels, size, etc) has its own properties (battery lifetime)."
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Vehicle {\npublic:\n    int wheels;\n};\n\n// TODO: Create Car class that inherits from Vehicle\nclass Car : public Vehicle {\npublic:\n    Car() { wheels = 4; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Car c;\n    if (c.wheels == 4) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Inheritance",
+        "explanation": "\uf075 Inheritance in case of C++ classes can be simple or multiple: \uf075 Simple Inheritance \uf075 Multiple Inheritance \uf075 The access modifier is optional and can be one of the following: (public / private or protected).  \uf075 If it is not specified, the default access modifier is private.",
+        "code_examples": [
+          {
+            "title": "Simple Inheritance",
+            "code": "#include <iostream>\nusing namespace std;\n\nclass Vehicle {\npublic:\n    int wheels;\n};\n\nclass Car : public Vehicle {\npublic:\n    Car() { wheels = 4; }\n};\n\nint main() {\n    Car c;\n    cout << \"Car has \" << c.wheels << \" wheels\" << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Vehicle {\npublic:\n    int wheels;\n};\n\n// TODO: Create Car class that inherits from Vehicle\nclass Car : public Vehicle {\npublic:\n    Car() { wheels = 4; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Car c;\n    if (c.wheels == 4) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Multiple",
+        "explanation": "<access modifier> <base class 2> ,  <access modifier> <base class 3> ,  <access modifier> <base class n> ,",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class n> ,   \n{ ... }"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Inheritance",
+        "explanation": "\uf075 Class \u201cDerived\u201d inherits members and methods from class \u201cBase\u201d. That is why  we can call methods SetX and SetY from an instance of \u201cDerived\u201d class. void SetX(int value); void SetY(int value); void main() { Derived d; d.SetX(100); d.SetY(200);",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nclass Base\n{\npublic:\nint x;\nvoid SetX(int value);\n};\nclass Derived : public Base\n{ int y;\npublic:\nvoid SetY(int value);\n};\n\nvoid main()\n{ Derived d;\nd.SetX(100);\nd.x = 10;\nd.SetY(200);\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Vehicle {\npublic:\n    int wheels;\n};\n\n// TODO: Create Car class that inherits from Vehicle\nclass Car : public Vehicle {\npublic:\n    Car() { wheels = 4; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Car c;\n    if (c.wheels == 4) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Inheritance",
+        "explanation": "\uf075 The following code will not compile. Class \u201cDerived\u201d inherits class \u201cBase\u201d,  but member \u201cx\u201d from class Base is private (this means that it can not be  accessed in class \u201cDerived\u201d). void SetY(int value); void SetX(int value); void Derived::SetX(int value) { x = value; void main()",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class Base is private (this means that it can not be \naccessed in class \u201cDerived\u201d).\n\nApp.cpp\n\nclass Base\n{\nprivate:\nint x;\n};\nclass Derived : public Base\n{ int y;\npublic:\nvoid SetY(int value);\nvoid SetX(int value);\n};\nvoid Derived::SetX(int value)\n{ x = value;\n}\nvoid main()\n{ Derived d;\nd.SetX(100);\nd.SetY(200);\n}\n error C2248: 'Base::x': cannot access private member declared \nin class 'Base'\nnote: see declaration of 'Base::x'\nnote: see declaration of 'Base'"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Vehicle {\npublic:\n    int wheels;\n};\n\n// TODO: Create Car class that inherits from Vehicle\nclass Car : public Vehicle {\npublic:\n    Car() { wheels = 4; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Car c;\n    if (c.wheels == 4) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Inheritance",
+        "explanation": "\uf075 The solution for this case is to use the \u201cprotected\u201d access modifier. A  protected member is a member that can be access by classes that inherits  current class, but it can not be accessed from outside the class.   void SetY(int value);   void SetX(int value); void Derived::SetX(int value) void main()   d.SetX(100);",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nclass Base\n{\nprotected:\n  int x;\n};\nclass Derived : public Base\n{\n  int y;\npublic:\n  void SetY(int value);\n  void SetX(int value);\n};\nvoid Derived::SetX(int value)\n{\n  x = value;\n}\nvoid main()\n{\n  Derived d;\n  d.SetX(100);\n  d.SetY(200);\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Vehicle {\npublic:\n    int wheels;\n};\n\n// TODO: Create Car class that inherits from Vehicle\nclass Car : public Vehicle {\npublic:\n    Car() { wheels = 4; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Car c;\n    if (c.wheels == 4) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Inheritance",
+        "explanation": "\uf075 The code below will not compile. \u201cx\u201d is declared as protected \u2013 this means  that it can be accessed in method SetX from a derived class, but it can not be  accessed outside it\u2019s scope (class).   void SetY(int value);   void SetX(int value); void Derived::SetX(int value) void main()   d.SetX(100);",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nclass Base\n{\nprotected:\n  int x;\n};\nclass Derived : public Base\n{\n  int y;\npublic:\n  void SetY(int value);\n  void SetX(int value);\n};\nvoid Derived::SetX(int value)\n{\n  x = value;\n}\nvoid main()\n{\n  Derived d;\n  d.SetX(100);\n  d.x = 100;\n}\n error C2248: 'Base::x': cannot access protected member declared \nin class 'Base'\nnote: see declaration of 'Base::x'\nnote: see declaration of 'Base'"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Vehicle {\npublic:\n    int wheels;\n};\n\n// TODO: Create Car class that inherits from Vehicle\nclass Car : public Vehicle {\npublic:\n    Car() { wheels = 4; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Car c;\n    if (c.wheels == 4) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Inheritance",
+        "explanation": "\uf075 The following table shows if a member with a specific access modifier can be  access and in what conditions:",
+        "code_examples": [
+          {
+            "title": "Protected Members",
+            "code": "#include <iostream>\nusing namespace std;\n\nclass Base {\nprotected:\n    int x;\n};\n\nclass Derived : public Base {\npublic:\n    Derived(int val) { x = val; }\n    int getValue() { return x; }\n};\n\nint main() {\n    Derived d(42);\n    cout << \"Value: \" << d.getValue() << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Vehicle {\npublic:\n    int wheels;\n};\n\n// TODO: Create Car class that inherits from Vehicle\nclass Car : public Vehicle {\npublic:\n    Car() { wheels = 4; }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Car c;\n    if (c.wheels == 4) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Friend \nfunction in the \nbase class\n Friend \nfunction in the",
+        "explanation": "derived class public Yes Yes Yes Yes Yes protected Yes Yes No Yes Yes private Yes No No Yes No",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class\n\npublic Yes Yes Yes Yes Yes\n\nprotected Yes Yes No Yes Yes\n\nprivate Yes No No Yes No"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Templates & Casts",
+    "concepts": [
+      {
+        "name": "OOP\n Gavrilut Dragos\n\nCourse 6Summary",
+        "explanation": "\uf075 Macros vs Inline \uf075 Literals \uf075 Templates \uf075 Function templates \uf075 Class templates \uf075 Template specialization \uf075 Compile-time assertion checking",
+        "code_examples": [
+          {
+            "title": "Course Summary",
+            "code": "#include <iostream>\nusing namespace std;\n\ntemplate<typename T>\nclass Box {\npublic:\n    T value;\n    Box(T v) : value(v) {}\n};\n\nint main() {\n    Box<int> b(42);\n    cout << \"Box value: \" << b.value << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Casts\n\nCasts",
+        "explanation": "\uf075 Assuming that a class A is derived from a class B, than it is possible for  an object of type A to be converted to an object of type B. \uf075 This is a normal behavior (obviously A contains every member defined  \uf075 The conversion rules are as follows: \u2756 It will always be possible to convert a class to any of the classes that it  \u2756 It is not possible to convert from a base class to one of the classes that  inherits it without an explicit cast \u2756 If the cast operator is overwritten, none of the above rules apply.",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class A is derived from a class B, than it is possible for \nan object of type A to be converted to an object of type B.\n\n\uf075"
+          },
+          {
+            "title": "Example 2",
+            "code": "class to any of the classes that it \ninherits \n\n\u2756 It is not possible to convert from a base class to one of the classes that \ninherits it without an explicit cast\n\n\u2756 If the cast operator is overwritten, none of the above rules apply."
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Casts",
+        "explanation": "\uf075 Let\u2019s consider the following code: \uf075 Assuming the pointer \u201cc\u201d points to the offset 300000, what do we need to do to obtain a  pointer to an object of type B* ? void main(void) { C* c = new C()",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nclass A { public: int a1, a2, a3; };\nclass B { public: int b1, b2; };\nclass C : public A, public B { public: int c1, c2; };\nvoid main(void) {\nC* c = new C()\nB* b = &c;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Offset Field/Var",
+        "explanation": "300000 c.a1 300004 c.a2 300008 c.a3 300012 c.b1 300016 c.b2 300020 c.c3 300024 c.c4",
+        "code_examples": [
+          {
+            "title": "Casting Objects",
+            "code": "#include <iostream>\nusing namespace std;\n\nclass A {\npublic:\n    int a;\n    A(int x = 0) : a(x) {}\n};\n\nclass B {\npublic:\n    int b;\n    B(int x = 0) : b(x) {}\n};\n\nint main() {\n    A a(10);\n    cout << \"A.a = \" << a.a << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Casts",
+        "explanation": "\uf075 Let\u2019s consider the following code: \uf075 Assuming the pointer \u201cc\u201d points to the offset 300000, what do we need to do to obtain a  pointer to an object of type B* ? \uf075 The simples way is to add (+12) to the offset  where \u201cc\u201d variable points. This will position the new pointer to a location of a B type void main(void) {",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nclass A { public: int a1, a2, a3; };\nclass B { public: int b1, b2; };\nclass C : public A, public B { public: int c1, c2; };\nvoid main(void) {\nC* c = new C()\nB* b = &c;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Offset Field/Var",
+        "explanation": "300000 c.a1 300004 c.a2 300008 c.a3 300012 c.b1 300016 c.b2 300020 c.c3 300024 c.c4",
+        "code_examples": [
+          {
+            "title": "Offset and Memory Layout",
+            "code": "#include <iostream>\nusing namespace std;\n\nclass Base {\npublic:\n    int x;\n    Base(int a = 0) : x(a) {}\n};\n\nint main() {\n    Base b(100);\n    cout << \"Base.x = \" << b.x << endl;\n    cout << \"sizeof(Base) = \" << sizeof(Base) << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "B\n\nCasts\n\nclass A",
+        "explanation": "void main(void) lea         ecx,[b]   call        B::B ;A* a = &b; lea         eax,[b]   mov       dword ptr [a],eax",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class B:public A\n{\npublic:\n    int b1,b2;\n};\n void main(void)\n{\n  B b;\n  A* a = &b; \n}\n\n;B b;\nlea         ecx,[b]  \ncall        B::B\n;A* a = &b;\nlea         eax,[b]  \nmov       dword ptr [a],eax"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Casts\n\nclass A",
+        "explanation": "void main(void)",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class B\n{\npublic:\n    int b1,b2;\n};\n void main(void)\n{\n  C c;\n  A* a;\n  B* b;\n\n  a = &c;\n  b = &c;\n}\n\nclass C:public A,B\n{\npublic:\n    int c1,c2;\n};"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Disasm",
+        "explanation": "lea    eax,[c]     mov    dword ptr [a],eax     lea    eax,[c]     test   eax,eax     je     NULL_CAST    lea    ecx,[c]     add    ecx,0Ch     mov    dword ptr [ebp-104h],ecx",
+        "code_examples": [
+          {
+            "title": "Assembly Disassembly",
+            "code": "#include <iostream>\nusing namespace std;\n\nclass Simple {\npublic:\n    int value;\n    Simple(int v = 0) : value(v) {}\n};\n\nint main() {\n    Simple s(123);\n    cout << \"Value: \" << s.value << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Casts\n\nclass A",
+        "explanation": "void main(void)",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class B\n{\npublic:\n    int b1,b2;\n};\n void main(void)\n{\n  C c;\n  A* a;\n  B* b;\n\n  a = &c;\n  b = &c;\n}\n\nclass C:public A,B\n{\npublic:\n    int c1,c2;\n};"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "STL Containers",
+    "concepts": [
+      {
+        "name": "OOP\n Gavrilut Dragos\n\nCourse 7\n rev 4\n\nSummary",
+        "explanation": "\uf075 Standard Template Library (STL) \uf075 Sequence containers \uf075 Adaptors \uf075 I/O Streams \uf075 Strings \uf075 Initialization lists",
+        "code_examples": [
+          {
+            "title": "STL Overview",
+            "code": "#include <iostream>\n#include <vector>\n#include <map>\n#include <string>\nusing namespace std;\n\nint main() {\n    // Vector example\n    vector<int> v;\n    v.push_back(1);\n    v.push_back(2);\n    \n    cout << \"Vector size: \" << v.size() << endl;\n    \n    // Map example\n    map<string, int> m;\n    m[\"Alice\"] = 95;\n    cout << \"Map size: \" << m.size() << endl;\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "STL (Standard Template Library)",
+        "explanation": "\uf075 A set of templates that contains: \uf075 Containers (class templates that may contain other classes) \uf075 Iterators (pointer used for template iteration) \uf075 Algorithms (functions that can be called for a container) \uf075 Adaptors \uf075 Allocators \uf075 To use an STL template, we have to include the header(s) where that  template is defined.",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class templates that may contain other classes)\n\n\uf075"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Create a template function for swapping\ntemplate<typename T>\nvoid swap_values(T& a, T& b) {\n    T temp = a;\n    a = b;\n    b = temp;\n}",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a = 5, b = 10;\n    swap_values(a, b);\n    \n    if (a == 10 && b == 5) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "STL- Containers",
+        "explanation": "\uf075 Sequence containers \uf075 forward_list \uf075 Adaptors (stack, queue, priority_queue) \uf075 Associative containers \uf075 Ordered: set, multiset, map, multimap \uf075 Un-ordered: unordered_set, unordered_map, unordered_multiset,  unordered_multimap",
+        "code_examples": [
+          {
+            "title": "STL Containers Overview",
+            "code": "#include <iostream>\n#include <vector>\n#include <list>\nusing namespace std;\n\nint main() {\n    // Vector\n    vector<int> v;\n    v.push_back(10);\n    v.push_back(20);\n    \n    // List\n    list<int> l;\n    l.push_back(100);\n    l.push_back(200);\n    \n    cout << \"Vector and List created\" << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: STL provides three main container types\n// 1. Sequence containers: vector, list, deque, forward_list\n// 2. Associative containers: set, multiset, map, multimap\n// 3. Unordered containers: unordered_set, unordered_map",
+          "test_harness": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    vector<int> v;\n    v.push_back(1);\n    \n    if (v.size() == 1) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Sequence \ncontainers\n\nSTL - Vector",
+        "explanation": "\uf075 Vector = an unidimensional array for objects \uf075 Constructors: \uf075 Memory allocation / resizing is done dynamically \uf075 Every object added in a vector is actually a copy of the original one using namespace std; void main(void)   vector<Type> v;   vector<Type> v(Size);",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nusing namespace std;\n#include <vector>\n\nvoid main(void)\n{\n  vector<Type> v;\n  vector<Type> v(Size);\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\n// TODO: Sequence containers (vector, list, deque)\n// Create a vector and add elements\nclass VectorExample {\n    vector<int> v;\npublic:\n    void add() {\n        v.push_back(1);\n        v.push_back(2);\n    }\n};",
+          "test_harness": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    vector<int> v;\n    v.push_back(1);\n    v.push_back(2);\n    \n    if (v.size() == 2) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "STL - Vector",
+        "explanation": "\uf075 Insertion in a vector is done using the following commands: push_back, insert \uf075 For deletion, we can use: pop_back, erase or clear \uf075 For reallocation: the resize and reserve methods \uf075 For access to elements: the index operator and the \u201cat\u201d method using namespace std; void main(void)   vector<int> v;   v.push_back(1);v.push_back(2);",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nusing namespace std;\n#include <vector>\n\nvoid main(void)\n{\n  vector<int> v;\n  v.push_back(1);v.push_back(2);\n      int x = v[1]; \n      int y = v.at(0); \n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\n// TODO: Vector operations: push_back, pop_back, insert, erase, clear\n// Demonstrate vector manipulation\nclass VectorOps {\n    vector<int> v;\npublic:\n    void demonstrate() {\n        v.push_back(1);\n        v.push_back(2);\n        v.push_back(3);\n    }\n};",
+          "test_harness": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    vector<int> v;\n    v.push_back(1);\n    v.push_back(2);\n    v.push_back(3);\n    \n    if (v.size() == 3) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "STL - Vector",
+        "explanation": "After execution: i=6,v[0]=5 using namespace std;   Integer() : Value(0) {}   Integer(int v) : Value(v) {}   Integer(const Integer &v) : Value(v.Value) {}   void Set(int v) { Value = v; } void main(void)   vector<Integer> v;",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nusing namespace std;\n#include <vector>\n\nclass Integer\n{\n  int Value;\npublic:\n  Integer() : Value(0) {}\n  Integer(int v) : Value(v) {}\n  Integer(const Integer &v) : Value(v.Value) {}\n  void Set(int v) { Value = v; }\n  int  Get() { return Value; }\n};\n\nvoid main(void)\n{\n  vector<Integer> v;\n  Integer i(5);\n  v.push_back(i);\n  i.Set(6);\n  printf(\"i=%d,v[0]=%d\\n\", i.Get(), v[0].Get());\n\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\n// TODO: Access vector elements using operator[] and at() method\nclass VectorAccess {\n    vector<int> v;\npublic:\n    void demonstrate() {\n        v.push_back(10);\n        v.push_back(20);\n        int x = v[0];\n        int y = v.at(1);\n    }\n};",
+          "test_harness": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    vector<int> v;\n    v.push_back(10);\n    v.push_back(20);\n    \n    if (v[0] == 10 && v.at(1) == 20) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "STL - Vector",
+        "explanation": "Integer() : Value(0) { printf(\"[%p] Default ctor\\n\", this); }   Integer(int v) : Value(v) { printf(\"[%p] Value ctor(%d)\\n\", this,v); }   Integer(const Integer &v) : Value(v.Value) { printf(\"[%p] Copy ctor from (%p,%d)\\n\",                                                      this, &v, v.Value); }   Integer& operator= (const Integer& i) { Value = i.Value; printf(\"[%p] op= (%p,%d)\\n\",                                                this, &i, i.Value); return *this; }   void Set(int v) { Value = v; } void main(void)",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nclass Integer\n{\n  int Value;\npublic:\n  Integer() : Value(0) { printf(\"[%p] Default ctor\\n\", this); }\n  Integer(int v) : Value(v) { printf(\"[%p] Value ctor(%d)\\n\", this,v); }\n  Integer(const Integer &v) : Value(v.Value) { printf(\"[%p] Copy ctor from (%p,%d)\\n\",  \n                                                   this, &v, v.Value); }\n  Integer& operator= (const Integer& i) { Value = i.Value; printf(\"[%p] op= (%p,%d)\\n\", \n                                              this, &i, i.Value); return *this; }\n  void Set(int v) { Value = v; }\n  int  Get() { return Value; }\n};\nvoid main(void)\n{\n  vector<Integer> v;\n  Integer i(5);\n  for (int tr = 0; tr < 5; tr++)\n  {\n    i.Set(1000 + tr);\n    v.push_back(i);\n  }\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\n// TODO: Vector stores copies of objects\nclass Integer {\npublic:\n    int Value;\n    Integer(int v = 0) : Value(v) {}\n    Integer(const Integer& i) : Value(i.Value) {}\n};",
+          "test_harness": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    vector<Integer> v;\n    Integer i(5);\n    v.push_back(i);\n    i.Value = 100;  // Change original\n    \n    if (v[0].Value == 5) {  // Vector has copy, not affected\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Pas Output",
+        "explanation": "- [0098FC90] Value ctor(5) tr=0 [00D3A688] Copy ctor from (0098FC90,1000) tr=1 [00D3A6C8] Copy ctor from (00D3A688,1000) [00D3A6CC] Copy ctor from (0098FC90,1001) tr=2 [00D3A710] Copy ctor from (00D3A6C8,1000) [00D3A714] Copy ctor from (00D3A6CC,1001) [00D3A718] Copy ctor from (0098FC90,1002) tr=3 [00D3A688] Copy ctor from (00D3A710,1000)",
+        "code_examples": [
+          {
+            "title": "Vector Copy Constructor",
+            "code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nclass Value {\npublic:\n    int x;\n    Value(int v = 0) : x(v) {}\n};\n\nint main() {\n    vector<Value> v;\n    Value val(42);\n    v.push_back(val);\n    \n    cout << \"Vector contains: \" << v[0].x << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "STL - Vector",
+        "explanation": "v.push_back(i)",
+        "code_examples": [],
+        "fill_in": {
+          "starter_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\n// TODO: Vector reallocates on push_back when full\nclass VectorBehavior {\n    vector<int> v;\npublic:\n    void demonstrate() {\n        for (int i = 0; i < 5; i++) {\n            v.push_back(i);\n        }\n    }\n};",
+          "test_harness": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    vector<int> v;\n    for (int i = 0; i < 5; i++) {\n        v.push_back(i);\n    }\n    \n    if (v.size() == 5) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "STL - Vector",
+        "explanation": "v.push_back(i) \uf075 Allocate space for  count+1 elements",
+        "code_examples": [],
+        "fill_in": {
+          "starter_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\n// TODO: Use reserve() to pre-allocate memory\nclass VectorReserve {\n    vector<int> v;\npublic:\n    void demonstrate() {\n        v.reserve(10);\n        v.push_back(1);\n    }\n};",
+          "test_harness": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    vector<int> v;\n    v.reserve(10);\n    v.push_back(1);\n    \n    if (v.size() == 1) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Advanced Containers & Pointers",
+    "concepts": [
+      {
+        "name": "OOP\n Gavrilut Dragos\n\nCourse 8\n rev 1\n\nSummary",
+        "explanation": "\uf075 Associative containers \uf075 Smart Pointers",
+        "code_examples": [
+          {
+            "title": "Advanced Containers",
+            "code": "#include <iostream>\n#include <map>\n#include <string>\n#include <memory>\nusing namespace std;\n\nint main() {\n    map<string, int> grades;\n    grades[\"Alice\"] = 95;\n    grades[\"Bob\"] = 87;\n    \n    cout << \"Grades map size: \" << grades.size() << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Associative \ncontainers\n\nSTL (associative containers - pair)",
+        "explanation": "\uf075 \u201cpair\u201d is a template that contains two values (two different types) \uf075 For use \u201c#include <utility>\u201d \uf075 Two objects of type pair can be compared because the = operator is  \uf075 It\u2019s internally used by associative containers \uf075 The declaration of pair template: template <class T1, class T2> struct pair",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "#include <utility>\u201d\n\n\uf075"
+          },
+          {
+            "title": "Example 2",
+            "code": "App.cpp\n\ntemplate <class T1, class T2>\nstruct pair\n{\n     T1 first;\n     T2 second;\n     ...\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "#include <iostream>\n#include <utility>\nusing namespace std;\n\n// TODO: Pair template stores two values\npair<int, string> p(1, \"one\");\nint first = p.first;\nstring second = p.second;",
+          "test_harness": "#include <iostream>\n#include <utility>\n#include <string>\nusing namespace std;\n\nint main() {\n    pair<int, string> p(1, \"one\");\n    \n    if (p.first == 1 && p.second == \"one\") {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "STL (associative containers - map)",
+        "explanation": "\uf075 Map is a container that store pairs of the form: key/value; the access to the  value field can be done using the key \uf075 For use \u201c#include <map>\u201d \uf075 The key field is constant: after a key/value pair is added into a map, the key  cannot be modified - only the value can be modified. Other pairs can be  added and existing pairs can be deleted. \uf075 The declaration of map template: template < class Key, class Value, class Compare = less<Key> > class map",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "#include <map>\u201d\n\n\uf075"
+          },
+          {
+            "title": "Example 2",
+            "code": "App.cpp\n\ntemplate < class Key, class Value, class Compare = less<Key> > class map\n{\n... \n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "#include <iostream>\n#include <utility>\n#include <string>\nusing namespace std;\n\n// TODO: Create and use pairs\npair<int, string> p1(1, \"one\");\npair<int, string> p2(2, \"two\");",
+          "test_harness": "#include <iostream>\n#include <utility>\n#include <string>\nusing namespace std;\n\nint main() {\n    pair<int, string> p1(1, \"one\");\n    pair<int, string> p2(2, \"two\");\n    \n    if (p1.first == 1 && p2.first == 2) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "STL (associative containers - map)",
+        "explanation": "\uf075 An example of using map: void main(void)   map<const char*, int> Grades;   Grades[\u201cPopescu\"] = 10;   Grades[\u201cIonescu\"] = 9;   Grades[\u201cMarin\"] = 7;   printf(\u201cIonescu\u2019s grade = %d\\n\", Grades[\u201cIonescu\"]);   printf(\u201cNumber of pairs = %d\\n\", Grades.size());",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nvoid main(void)\n{\n  map<const char*, int> Grades;\n  Grades[\u201cPopescu\"] = 10;\n  Grades[\u201cIonescu\"] = 9;\n  Grades[\u201cMarin\"] = 7;\n  printf(\u201cIonescu\u2019s grade = %d\\n\", Grades[\u201cIonescu\"]);\n  printf(\u201cNumber of pairs = %d\\n\", Grades.size());\n  map<const char*, int>::iterator it;\n  for (it = Grades.begin(); it != Grades.end(); it++)\n    printf(\"Grades[%s]=%d\\n\", it->first, it->second);\n  it = Grades.find(\u201cIonescu\");\n  Grades.erase(it);\n  int x = Grades [\u201cIonescu\"];\n  printf(\u201cIonescu\u2019s grade = %d (x=%d)\\n\", Grades[\u201cIonescu\"],x);\n  printf(\"Number of pairs = %d\\n\", Grades.size());\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "#include <iostream>\n#include <utility>\n#include <string>\nusing namespace std;\n\n// TODO: Pair template stores two values\nclass PairExample {\n    pair<int, string> p;\npublic:\n    PairExample() : p(1, \"one\") {}\n};",
+          "test_harness": "#include <iostream>\n#include <utility>\n#include <string>\nusing namespace std;\n\nint main() {\n    pair<int, string> p(1, \"one\");\n    \n    if (p.first == 1 && p.second == \"one\") {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Output",
+        "explanation": "Ionescu\u2019s grade = 9 Number of pairs = 3 Grades[Popescu]=10 Grades[Ionescu]=9 Grades[Marin]=7 Ionescu\u2019s grade = 0 (x=0) Number of pairs = 3",
+        "code_examples": [
+          {
+            "title": "Map Output Example",
+            "code": "#include <iostream>\n#include <map>\n#include <string>\nusing namespace std;\n\nint main() {\n    map<string, int> m;\n    m[\"A\"] = 1;\n    m[\"B\"] = 2;\n    m[\"C\"] = 3;\n    \n    for (auto& p : m) {\n        cout << p.first << \" => \" << p.second << endl;\n    }\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "STL (associative containers - map)",
+        "explanation": "\uf075 An example of using map: void main(void)   map<const char*, int> Grades;   Grades[\u201cPopescu\"] = 10;   Grades[\u201cIonescu\"] = 9;   Grades[\u201cMarin\"] = 7;   printf(\u201cIonescu\u2019s grade = %d\\n\", Grades[\u201cIonescu\"]);   printf(\u201cNumber of pairs = %d\\n\", Grades.size());",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nvoid main(void)\n{\n  map<const char*, int> Grades;\n  Grades[\u201cPopescu\"] = 10;\n  Grades[\u201cIonescu\"] = 9;\n  Grades[\u201cMarin\"] = 7;\n  printf(\u201cIonescu\u2019s grade = %d\\n\", Grades[\u201cIonescu\"]);\n  printf(\u201cNumber of pairs = %d\\n\", Grades.size());\n  map<const char*, int>::iterator it;\n  for (it = Grades.begin(); it != Grades.end(); it++)\n    printf(\"Grades[%s]=%d\\n\", it->first, it->second);\n  it = Grades.find(\u201cIonescu\");\n  Grades.erase(it);\n  int x = Grades [\u201cIonescu\"];\n  printf(\u201cIonescu\u2019s grade = %d (x=%d)\\n\", Grades[\u201cIonescu\"],x);\n  printf(\"Number of pairs = %d\\n\", Grades.size());\n}\n The \u201cIonescu\u201d key does not exist at this point. Because \nit not exists, a new one is created and the value is \ninstantiated using the default constructor (which for \nint makes the value to be 0)"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "#include <iostream>\n#include <map>\n#include <string>\nusing namespace std;\n\n// TODO: Map stores key-value pairs\nclass MapExample {\n    map<string, int> m;\npublic:\n    MapExample() {\n        m[\"Alice\"] = 95;\n        m[\"Bob\"] = 87;\n    }\n};",
+          "test_harness": "#include <iostream>\n#include <map>\n#include <string>\nusing namespace std;\n\nint main() {\n    map<string, int> m;\n    m[\"Alice\"] = 95;\n    m[\"Bob\"] = 87;\n    \n    if (m[\"Alice\"] == 95) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "STL (associative containers - map)",
+        "explanation": "\uf075 The methods supported by the map container:",
+        "code_examples": [
+          {
+            "title": "Associative Containers",
+            "code": "#include <iostream>\n#include <map>\n#include <set>\n#include <string>\nusing namespace std;\n\nint main() {\n    map<int, string> m;\n    m[1] = \"one\";\n    m[2] = \"two\";\n    \n    set<int> s;\n    s.insert(1);\n    s.insert(2);\n    \n    cout << \"Map size: \" << m.size() << \", Set size: \" << s.size() << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "#include <iostream>\n#include <map>\n#include <string>\nusing namespace std;\n\n// TODO: Map operations: insert, erase, find\nclass MapOps {\n    map<string, int> m;\npublic:\n    void demonstrate() {\n        m[\"one\"] = 1;\n        m.erase(\"one\");\n        auto it = m.find(\"two\");\n    }\n};",
+          "test_harness": "#include <iostream>\n#include <map>\n#include <string>\nusing namespace std;\n\nint main() {\n    map<string, int> m;\n    m[\"one\"] = 1;\n    \n    if (m.find(\"one\") != m.end()) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Method/operator",
+        "explanation": "Assignment (operator= ) Accessing and inserting values (operator[] and at, insert methods) Deletion (erase, clear methods)",
+        "code_examples": [
+          {
+            "title": "Map Methods",
+            "code": "#include <iostream>\n#include <map>\nusing namespace std;\n\nint main() {\n    map<int, int> m;\n    m[1] = 10;\n    m[2] = 20;\n    \n    // find, insert, erase\n    auto it = m.find(1);\n    if (it != m.end()) {\n        cout << \"Found: \" << it->second << endl;\n    }\n    \n    m.erase(2);\n    cout << \"Size after erase: \" << m.size() << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "class Number {\npublic:\n    int value;\n    Number(int v = 0) : value(v) {}\n    // TODO: Implement operator+\n    Number operator+(const Number& other) {\n        return Number(value + other.value);\n    }\n};",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    Number n1(10), n2(5);\n    Number n3 = n1 + n2;\n    \n    if (n3.value == 15) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Search into a map (find method)",
+        "explanation": "Iterators (begin, end, rbegin, rend, cbegin, cend, crbegin, crend (the last 4 from",
+        "code_examples": [
+          {
+            "title": "Map Find Method",
+            "code": "#include <iostream>\n#include <map>\n#include <string>\nusing namespace std;\n\nint main() {\n    map<string, int> m;\n    m[\"alpha\"] = 1;\n    m[\"beta\"] = 2;\n    m[\"gamma\"] = 3;\n    \n    auto it = m.find(\"beta\");\n    if (it != m.end()) {\n        cout << \"Found: \" << it->second << endl;\n    }\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "#include <iostream>\n#include <map>\n#include <string>\nusing namespace std;\n\n// TODO: Use find() to search in a map\nclass MapFind {\n    map<string, int> m;\npublic:\n    void search() {\n        m[\"key1\"] = 100;\n        auto it = m.find(\"key1\");\n    }\n};",
+          "test_harness": "#include <iostream>\n#include <map>\n#include <string>\nusing namespace std;\n\nint main() {\n    map<string, int> m;\n    m[\"key1\"] = 100;\n    auto it = m.find(\"key1\");\n    \n    if (it != m.end() && it->second == 100) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "C++11) )",
+        "explanation": "Informations (size, empty, max_size)",
+        "code_examples": [
+          {
+            "title": "Map Informations",
+            "code": "#include <iostream>\n#include <map>\nusing namespace std;\n\nint main() {\n    map<int, int> m;\n    m[1] = 10;\n    m[2] = 20;\n    m[3] = 30;\n    \n    cout << \"Size: \" << m.size() << endl;\n    cout << \"Empty: \" << m.empty() << endl;\n    cout << \"Max size: \" << m.max_size() << endl;\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Modern C++ Features",
+    "concepts": [
+      {
+        "name": "OOP\n Gavrilut Dragos\n\nCourse 9\n rev 1\n\nSummary",
+        "explanation": "\uf075 Constant expressions \uf075 For each (Range-based for loop) \uf075 Type inference \uf075 Structured binding (destructuring) \uf075 Static Polymorphism (CRTP) \uf075 Plain Old Data (POD)",
+        "code_examples": [
+          {
+            "title": "Modern C++ Features",
+            "code": "#include <iostream>\nusing namespace std;\n\nconstexpr int factorial(int n) {\n    return n <= 1 ? 1 : n * factorial(n - 1);\n}\n\nint main() {\n    constexpr int result = factorial(5);\n    cout << \"5! = \" << result << endl;\n    \n    // Range-based for\n    int arr[] = {1, 2, 3, 4, 5};\n    for (int x : arr) {\n        cout << x << \" \";\n    }\n    cout << endl;\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Constant \nexpressions\n\nConstant expressions",
+        "explanation": "\uf075 Constant expressions are pieces of code that the compiler can optimize by  replacing them with their value that is computed before compilation phase \uf075 Constant expression can be easily deducted for variables (especially \u201cconst\u201d  variables). However, in case of functions this is more difficult. \uf075 Let\u2019s analyze the following code: void main() { int x = 10;",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nvoid main()\n{ int x = 10;\nint y = x;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Constant expressions",
+        "explanation": "\uf075 Constant expressions are pieces of code that the compiler can optimize by  replacing them with their value that is computed before compilation phase \uf075 Constant expression can be easily deducted for variables (especially \u201cconst\u201d  variables). However, in case of functions this is more difficult. \uf075 Let\u2019s analyze the following code: \uf075 When creating \u201cy\u201d the compiler copies the value from \u201cx\u201d void main()",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nvoid main()\n{ int x = 10;\nint y = x;\n}\n int x = 10;\nmov         dword ptr [x],0Ah \n\n       int y = x;\nmov         eax,dword ptr [x]  \nmov dword ptr [y],eax"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Constant expressions",
+        "explanation": "\uf075 Constant expressions are pieces of code that the compiler can optimize by  replacing them with their value that is computed before compilation phase \uf075 Constant expression can be easily deducted for variables (especially \u201cconst\u201d  variables). However, in case of functions this is more difficult. \uf075 Let\u2019s analyze the following code: \uf075 However, adding a \u201cconst\u201d declaration in front of \u201cx\u201d makes the compiler  change the way if creates \u201cy\u201d (now the compiler will directly assign the value  10 (the constant value of \u201cx\u201d to \u201cy\u201d)",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nvoid main()\n{ const int x = 10;\nint y = x;\n}\n const int x = 10;\nmov         dword ptr [x], 0Ah \n       int y = x;\nmov dword ptr [y], 0Ah"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Constant expressions",
+        "explanation": "\uf075 Constant expressions are pieces of code that the compiler can optimize by  replacing them with their value that is computed before compilation phase \uf075 Constant expression can be easily deducted for variables (especially \u201cconst\u201d  variables). However, in case of functions this is more difficult. \uf075 Let\u2019s analyze the following code: \uf075 The same thing applies for expressions where the result is always a constant  value. In this case, the compiler computes the value of the expression  \u201c1+2+3\u201d and assigns that value to \u201cx\u201d directly.",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nvoid main()\n{ int x = 1 + 2 + 3 ;\nint y = x;\n} int x = 1+2+3;\nmov         dword ptr [x], 6"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Constant expressions",
+        "explanation": "\uf075 Constant expressions are in particular important when declaring arrays: \uf075 This code will not compile. In reality \u2013 GetCount() returns a \u201cconst\u201d values,  but the compiler does not know if it can replace it with its value (for example  GetCount() might do something else \u2192 like modifying some global variables). \uf075 The compiler will yield an error: \u201cexpecting constant expression\u201d when  defining \u201cx\u201d  void main()  error C2131: expression did not evaluate to a constant",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nint GetCount()\n{\n  return 5;\n}\n\nvoid main()\n{\n  int x[GetCount()];\n}\n error C2131: expression did not evaluate to a constant\nnote: failure was caused by call of undefined function or one not declared 'constexpr'\nnote: see usage of 'GetCount"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Constant expressions",
+        "explanation": "\uf075 Constant expressions are in particular important when declaring arrays: \uf075 Even if we add a \u201cconst\u201d keyword at the beginning of the function, the result  is still the same.  \uf075 The compiler only knows that the result can not be modified (this does not  imply that the result is a constant value, and that the compiler can replace  the entire call for that function with its value). const int GetCount() void main()",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nconst int GetCount()\n{\n  return 5;\n}\n\nvoid main()\n{\n  int x[GetCount()];\n}\n error C2131: expression did not evaluate to a constant\nnote: failure was caused by call of undefined function or one not declared 'constexpr'\nnote: see usage of 'GetCount"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Constant expressions",
+        "explanation": "\uf075 Cx++11 adds a new keyword: \u201cconstexpr\u201d that tells the compiler that a  specific expression should be considered constant. \uf075 Now the code will compile.  constexpr int GetCount() void main()",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nconstexpr int GetCount()\n{\n  return 5;\n}\nvoid main()\n{\n  int x[GetCount()];\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Constant expressions",
+        "explanation": "\uf075 Cx++11 adds a new keyword: \u201cconstexpr\u201d that tells the compiler that a  specific expression should be considered constant. \uf075 As GetCount() will be replaced with 5, the space needed for \u201cx\u201d will be 5  integers (sizeof(int) = 4, 4 x 5 = 20 )  constexpr int GetCount() void main() mov  ebp,esp sub  esp, 20",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nconstexpr int GetCount()\n{\n  return 5;\n}\nvoid main()\n{\n  int x[GetCount()];\n}\n push  ebp\nmov  ebp,esp\nsub  esp, 20"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Constant expressions",
+        "explanation": "\uf075 Using \u201cconstexpr\u201d comes with some limitations: \u2751 A constexpr function should not be void \uf075 In this case the compiler will state that it can not create an array from a void  constexpr void GetCount() void main()",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nconstexpr void GetCount()\n{\n  //return 5;\n}\nvoid main()\n{\n  int x[GetCount()];\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Lambda Expressions",
+    "concepts": [
+      {
+        "name": "OOP\n Gavrilut Dragos\n\nCourse 10\n Rev 1\n\nSummary",
+        "explanation": "\uf075 Lambda expressions \uf075 Modeling lambda expression behavior \uf075 Implicit conversion to a pointer to a function \uf075 Lambdas and STL \uf075 Using lambda with templates (Generic lambdas) \uf075 Mutable capture \uf075 Initialized lambda capture \uf075 New feature in C++17 and beyond",
+        "code_examples": [
+          {
+            "title": "Lambda Expressions",
+            "code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    vector<int> v = {3, 1, 4, 1, 5};\n    \n    // Lambda to print\n    auto print = [](int x) { cout << x << \" \"; };\n    \n    cout << \"Vector: \";\n    for_each(v.begin(), v.end(), print);\n    cout << endl;\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Lambda \nexpressions\n\nLambda expressions",
+        "explanation": "\uf075 Lets assume that we have the following structure: \uf075 \u2018students\u2019  is a global list of students. struct Student { const char * Name; Student students[] = { { \"Popescu\",  10, 5, 19 }, { \"Ionescu\",   8, 3, 20 }, { \"Georgescu\", 9, 4, 21 },",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nstruct Student\n{ const char * Name;\nint Grade;\nint Group;\nint Age;\n};\n\nStudent students[] = {\n{ \"Popescu\",  10, 5, 19 },\n{ \"Ionescu\",   8, 3, 20 },\n{ \"Georgescu\", 9, 4, 21 },\n};"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Create a lambda that multiplies two numbers\nauto multiply = [](int a, int b) { return a * b; };",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    auto multiply = [](int a, int b) { return a * b; };\n    int result = multiply(6, 7);\n    \n    if (result == 42) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Lambda expressions",
+        "explanation": "\uf075 Now let\u2019s assume that we want to sort the entire student list in different  ways (alphabetically, after the \u2019Age\u2019 field, based on the \u2018Grade\u2019 field, etc). \uf075 The easiest way would be to create a sort algorithm that uses a pointer to a  function used to compare to Student structures. void Sort(Student *list, int count, bool(*BiggerFnc)(Student &s1, Student &s2) ) { bool sorted; do { sorted = true; for (int tr = 0; tr < count - 1; tr++)",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nvoid Sort(Student *list, int count, bool(*BiggerFnc)(Student &s1, Student &s2) ) {\nbool sorted;\ndo { sorted = true;\nfor (int tr = 0; tr < count - 1; tr++)\n{ if (BiggerFnc(list[tr], list[tr + 1]))\n{ Student aux = list[tr];\nlist[tr] = list[tr + 1];\nlist[tr + 1] = aux;\nsorted = false;\n}\n}\n} while (!sorted);\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Create a lambda that multiplies two numbers\nauto multiply = [](int a, int b) { return a * b; };",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    auto multiply = [](int a, int b) { return a * b; };\n    int result = multiply(6, 7);\n    \n    if (result == 42) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Lambda expressions",
+        "explanation": "\uf075 The main function will look as follows: struct Student { \u2026 } Student students[3] = { \u2026 } void Sort(Student *list, int count, bool(*BiggerFnc)(Student &s1, Student &s2) ) { \u2026 } bool ByGrade (Student &s1, Student &s2)   return s1.Grade > s2.Grade; bool ByAge (Student &s1, Student &s2)   return s1.Age > s2.Age;",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nstruct Student { \u2026 }\nStudent students[3] = { \u2026 }\nvoid Sort(Student *list, int count, bool(*BiggerFnc)(Student &s1, Student &s2) ) { \u2026 }\n\nbool ByGrade (Student &s1, Student &s2)\n{\n  return s1.Grade > s2.Grade;\n}\nbool ByAge (Student &s1, Student &s2)\n{\n  return s1.Age > s2.Age;\n}\nbool ByName (Student &s1, Student &s2)\n{\n  return strcmp(s1.Name, s2.Name) > 0;\n}\n\nint main() {\n  Sort(students, 3, ByGrade );\n  Sort(students, 3, ByAge );\n  Sort(students, 3, ByName );\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Create a lambda that multiplies two numbers\nauto multiply = [](int a, int b) { return a * b; };",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    auto multiply = [](int a, int b) { return a * b; };\n    int result = multiply(6, 7);\n    \n    if (result == 42) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Lambda expressions",
+        "explanation": "\uf075 Instead of creating functions for each comparation, wouldn\u2019t it be easier if  we could just write the comparation  whenever we call the Sort function. \uf075 The code compiles and works as expected, the list of students being sorted  based on the \u2018Grade\u2019 field. struct Student { \u2026 } Student students[3] = { \u2026 } void Sort(Student *list, int count, bool(*BiggerFnc)(Student &s1, Student &s2) ) { \u2026 }   Sort(students, 3, [](Student &s1, Student &s2) { return s1.Grade > s2.Grade; } );",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\nstruct Student { \u2026 }\nStudent students[3] = { \u2026 }\nvoid Sort(Student *list, int count, bool(*BiggerFnc)(Student &s1, Student &s2) ) { \u2026 }\n\nint main() {\n  Sort(students, 3, [](Student &s1, Student &s2) { return s1.Grade > s2.Grade; } );\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Create a lambda that multiplies two numbers\nauto multiply = [](int a, int b) { return a * b; };",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    auto multiply = [](int a, int b) { return a * b; };\n    int result = multiply(6, 7);\n    \n    if (result == 42) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Lambda expressions",
+        "explanation": "\uf075 A lambda expression also has the ability to capture a state (variables) via  copy or reference and use it in a function. This behavior is also called a  \uf075 Let\u2019s analyze the following python code (chosen for simplicity): def Multiply(factor):   return lambda x: x * factor def main():   f1 = Multiply(5)   f2 = Multiply(7)",
+        "code_examples": [
+          {
+            "title": "Lambda Capture",
+            "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int factor = 5;\n    \n    // Lambda capturing by value\n    auto multiply = [factor](int x) { return x * factor; };\n    \n    cout << \"3 * 5 = \" << multiply(3) << endl;\n    cout << \"7 * 5 = \" << multiply(7) << endl;\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Create a lambda that multiplies two numbers\nauto multiply = [](int a, int b) { return a * b; };",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    auto multiply = [](int a, int b) { return a * b; };\n    int result = multiply(6, 7);\n    \n    if (result == 42) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Lambda expressions",
+        "explanation": "\uf075 A lambda expression also has the ability to capture a state (variables) via  copy or reference and use it in a function. This behavior is also called a  \uf075 Let\u2019s analyze the following python code (chosen for simplicity): def Multiply(factor):   return lambda x: x * factor def main():   f1 = Multiply(5)   f2 = Multiply(7)",
+        "code_examples": [
+          {
+            "title": "Lambda with Capture",
+            "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int multiplier = 10;\n    \n    auto multiply = [multiplier](int x) {\n        return x * multiplier;\n    };\n    \n    cout << \"Result: \" << multiply(5) << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Create a lambda that multiplies two numbers\nauto multiply = [](int a, int b) { return a * b; };",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    auto multiply = [](int a, int b) { return a * b; };\n    int result = multiply(6, 7);\n    \n    if (result == 42) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Multiply function actually returns",
+        "explanation": "another function (that has a prototipe  like the following:) def Function(x): returns x * factor",
+        "code_examples": [
+          {
+            "title": "Closure and Capture",
+            "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int base = 100;\n    \n    auto addToBase = [base](int x) { return base + x; };\n    \n    cout << \"100 + 5 = \" << addToBase(5) << endl;\n    cout << \"100 + 20 = \" << addToBase(20) << endl;\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Lambda expressions",
+        "explanation": "\uf075 A lambda expression also has the ability to capture a state (variables) via  copy or reference and use it in a function. This behavior is also called a  \uf075 Let\u2019s analyze the following python code (chosen for simplicity): def Multiply(factor):   return lambda x: x * factor def main():   f1 = Multiply(5)   f2 = Multiply(7)",
+        "code_examples": [
+          {
+            "title": "Lambda and Variables",
+            "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 10;\n    int y = 20;\n    \n    auto sum = [x, y]() { return x + y; };\n    cout << \"x + y = \" << sum() << endl;\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Create a lambda that multiplies two numbers\nauto multiply = [](int a, int b) { return a * b; };",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    auto multiply = [](int a, int b) { return a * b; };\n    int result = multiply(6, 7);\n    \n    if (result == 42) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "The factor parameter from the Multiply",
+        "explanation": "function is used in this function (as the",
+        "code_examples": [],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Exceptions & Error Handling",
+    "concepts": [
+      {
+        "name": "OOP\n Gavrilut Dragos\n\nCourse 11\n rev 1\n\nSummary",
+        "explanation": "\uf075 Basic Exceptions \uf075 Standard exceptions \uf075 noexcept keyword \uf075 Modeling Exception Behavior \uf075 SEH (Structured Exception Handling)",
+        "code_examples": [
+          {
+            "title": "Exception Handling",
+            "code": "#include <iostream>\nusing namespace std;\n\nint divide(int a, int b) {\n    if (b == 0) {\n        throw \"Division by zero!\";\n    }\n    return a / b;\n}\n\nint main() {\n    try {\n        cout << \"10 / 2 = \" << divide(10, 2) << endl;\n    } catch (const char* msg) {\n        cout << \"Error: \" << msg << endl;\n    }\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Basic Exceptions\n\nExceptions",
+        "explanation": "\uf075 Exceptions are a way to identify errors that can occur in a program and react  Where exception-1,2,\u20263 could be anything: a type, a reference, a pointer catch (<exception-1>) { \u2026 } catch (<exception-2>) { \u2026 } catch (<exception-3>) { \u2026 } catch (\u2026) { /* the rest of the possible exceptions */ }",
+        "code_examples": [
+          {
+            "title": "Try-Catch Basics",
+            "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    try {\n        int x = 10;\n        if (x > 5) throw \"Value too high\";\n        cout << x << endl;\n    } catch (const char* msg) {\n        cout << \"Caught: \" << msg << endl;\n    }\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Throw exception if age is negative\nint validate(int age) {\n    if (age < 0) throw \"Age cannot be negative\";\n    return age;\n}",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    try {\n        validate(25);\n        cout << \"ALL TESTS PASSED\" << endl;\n    } catch (...) {\n        // Should not catch\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Exceptions",
+        "explanation": "\uf075 Additionally, the keyword throw can be used to throw an exception that will  further be received by the try \u2026 catch block When using this method, the object <obj> will be send to the catch block (as  such the <exception> parameter in the catch block should have the same type or  a type where there is a possible conversion from the thrown type exists.     throw <obj> catch (<exception> /* exception has the same type as obj */ ) { \u2026 } catch (\u2026) { /* the rest of the possible exceptions */ }",
+        "code_examples": [
+          {
+            "title": "Multiple Exception Types",
+            "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    try {\n        int choice = 2;\n        if (choice == 1) throw 10;\n        else if (choice == 2) throw \"string error\";\n    } catch (int e) {\n        cout << \"Integer exception: \" << e << endl;\n    } catch (const char* e) {\n        cout << \"String exception: \" << e << endl;\n    }\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Throw exception if age is negative\nint validate(int age) {\n    if (age < 0) throw \"Age cannot be negative\";\n    return age;\n}",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    try {\n        validate(25);\n        cout << \"ALL TESTS PASSED\" << endl;\n    } catch (...) {\n        // Should not catch\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Exceptions",
+        "explanation": "\uf075 Let\u2019s see an example: for (int tr = 0; tr < 10; tr++) { if (tr == 5) throw \"Reached 5\"; catch (const char* error) { std::cout << \"Error: \" << error; Error: Reached 5",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\n#include <stdio.h>\n#include <iostream>\n\nint main() {\ntry {\nfor (int tr = 0; tr < 10; tr++) {\nif (tr == 5) throw \"Reached 5\";\n}\n}\ncatch (const char* error) {\nstd::cout << \"Error: \" << error;\n}\n\nreturn 0;\n}\n Output:\nError: Reached 5"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Throw exception if age is negative\nint validate(int age) {\n    if (age < 0) throw \"Age cannot be negative\";\n    return age;\n}",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    try {\n        validate(25);\n        cout << \"ALL TESTS PASSED\" << endl;\n    } catch (...) {\n        // Should not catch\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Exceptions",
+        "explanation": "\uf075 A more complex example: for (int tr = 0; tr < 10; tr++) {             if (tr == 5) throw \"Reached 5\"; if (tr == 3) throw 3; if (tr == 1) throw true; std::cout << \"Number : \" << tr << std::endl; catch (const char* e) { std::cout << \"String Err: \" << e << std::endl; } catch (int e) { std::cout << \"Int Err: \" << e << std::endl; }",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\n#include <stdio.h>\n#include <iostream>\n\nint main() {\nfor (int tr = 0; tr < 10; tr++) {            \ntry {\nif (tr == 5) throw \"Reached 5\";\nif (tr == 3) throw 3;\nif (tr == 1) throw true;\nstd::cout << \"Number : \" << tr << std::endl;\n}\ncatch (const char* e) { std::cout << \"String Err: \" << e << std::endl; }\ncatch (int e) { std::cout << \"Int Err: \" << e << std::endl; }\ncatch (bool e) { std::cout << \"Bool Err: \" << e << std::endl; }\n}\nreturn 0;\n}\n Output:\nNumber : 0\nBool Err: 1\nNumber : 2\nInt Err: 3\nNumber : 4\nString Err: Reached 5\nNumber : 6\nNumber : 7\nNumber : 8\nNumber : 9"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Throw exception if age is negative\nint validate(int age) {\n    if (age < 0) throw \"Age cannot be negative\";\n    return age;\n}",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    try {\n        validate(25);\n        cout << \"ALL TESTS PASSED\" << endl;\n    } catch (...) {\n        // Should not catch\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Exceptions",
+        "explanation": "\uf075 However, the rules of promotion don\u2019t apply: \uf075 The throw instruction sends a char, but the catch requires an int. As such the  exception is not caught and a runtime crash will happen. for (int tr = 0; tr < 10; tr++) {             if (tr == 3) throw 'A'; std::cout << \"Number : \" << tr << std::endl; catch (int e) { std::cout << \"Int Err: \" << e << std::endl; }",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\n#include <stdio.h>\n#include <iostream>\n\nint main() {\nfor (int tr = 0; tr < 10; tr++) {            \ntry {\nif (tr == 3) throw 'A';\nstd::cout << \"Number : \" << tr << std::endl;\n}\ncatch (int e) { std::cout << \"Int Err: \" << e << std::endl; }\n}\nreturn 0;\n}\n Output:\nNumber : 0\nNumber : 1\nNumber : 2"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Throw exception if age is negative\nint validate(int age) {\n    if (age < 0) throw \"Age cannot be negative\";\n    return age;\n}",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    try {\n        validate(25);\n        cout << \"ALL TESTS PASSED\" << endl;\n    } catch (...) {\n        // Should not catch\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Exceptions",
+        "explanation": "\uf075 However, you can always use catch(\u2026) to capture any kind of exception.  Details related to the exception will not be present. for (int tr = 0; tr < 10; tr++) {             if (tr == 1) throw true; if (tr == 3) throw 'A';  if (tr == 5) throw \"some error\"; if (tr == 7) throw 10; std::cout << \"Number : \" << tr << std::endl;",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\n#include <stdio.h>\n#include <iostream>\n\nint main() {\nfor (int tr = 0; tr < 10; tr++) {            \ntry {\nif (tr == 1) throw true;\nif (tr == 3) throw 'A'; \nif (tr == 5) throw \"some error\";\nif (tr == 7) throw 10;\nstd::cout << \"Number : \" << tr << std::endl;\n}\ncatch (int e) { std::cout << \"Int Err: \" << e << std::endl; }\ncatch (...) { std::cout << \"Generic exceptions\" << std::endl; }\n}\nreturn 0;\n}\n Output:\nNumber : 0"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Throw exception if age is negative\nint validate(int age) {\n    if (age < 0) throw \"Age cannot be negative\";\n    return age;\n}",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    try {\n        validate(25);\n        cout << \"ALL TESTS PASSED\" << endl;\n    } catch (...) {\n        // Should not catch\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Generic exceptions",
+        "explanation": "Int Err: 10",
+        "code_examples": [
+          {
+            "title": "Generic Exception Catching",
+            "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    try {\n        throw \"Some error\";\n    } catch (...) {\n        cout << \"Caught an exception!\" << endl;\n    }\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Throw exception if age is negative\nint validate(int age) {\n    if (age < 0) throw \"Age cannot be negative\";\n    return age;\n}",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    try {\n        validate(25);\n        cout << \"ALL TESTS PASSED\" << endl;\n    } catch (...) {\n        // Should not catch\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Exceptions",
+        "explanation": "\uf075 However, you can always use catch(\u2026) to capture any kind of exception.  Details related to the exception will not be present. for (int tr = 0; tr < 10; tr++) {             if (tr == 1) throw true; if (tr == 3) throw 'A';  if (tr == 5) throw \"some error\"; if (tr == 7) throw 10; std::cout << \"Number : \" << tr << std::endl;",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\n#include <stdio.h>\n#include <iostream>\n\nint main() {\nfor (int tr = 0; tr < 10; tr++) {            \ntry {\nif (tr == 1) throw true;\nif (tr == 3) throw 'A'; \nif (tr == 5) throw \"some error\";\nif (tr == 7) throw 10;\nstd::cout << \"Number : \" << tr << std::endl;\n}\ncatch (int e) { std::cout << \"Int Err: \" << e << std::endl; }\ncatch (...) { std::cout << \"Generic exceptions\" << std::endl; }\n}\nreturn 0;\n}\n Output:\nNumber : 0"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Throw exception if age is negative\nint validate(int age) {\n    if (age < 0) throw \"Age cannot be negative\";\n    return age;\n}",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    try {\n        validate(25);\n        cout << \"ALL TESTS PASSED\" << endl;\n    } catch (...) {\n        // Should not catch\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Generic exceptions",
+        "explanation": "Int Err: 10",
+        "code_examples": [
+          {
+            "title": "Generic Catch-All",
+            "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    try {\n        int errorCode = 42;\n        throw errorCode;\n    } catch (int e) {\n        cout << \"Error code: \" << e << endl;\n    }\n    \n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Throw exception if age is negative\nint validate(int age) {\n    if (age < 0) throw \"Age cannot be negative\";\n    return age;\n}",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    try {\n        validate(25);\n        cout << \"ALL TESTS PASSED\" << endl;\n    } catch (...) {\n        // Should not catch\n    }\n    return 0;\n}"
+        }
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Design Patterns",
+    "concepts": [
+      {
+        "name": "OOP\n Gavrilut Dragos\n\nCourse 12\n rev 1\n\nSummary",
+        "explanation": "\uf075 SOLID Principles \uf075 Gang of Four (GoF) \uf075 Singleton \uf075 Multiton \uf075 Factory \uf075 Builder \uf075 Adaptor \uf075 Composite",
+        "code_examples": [
+          {
+            "title": "Design Patterns",
+            "code": "#include <iostream>\nusing namespace std;\n\nclass Logger {\npublic:\n    void log(const string& msg) {\n        cout << \"LOG: \" << msg << endl;\n    }\n};\n\nint main() {\n    Logger l;\n    l.log(\"Application started\");\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Single Responsibility Principle",
+        "explanation": "\uf075 A class should have only one reason to change, focusing on a single  responsibility Advantages: \uf075 Easier to understand. \uf075 Lower coupling between logic and infrastructure. \uf075 Improved testability and reusability.",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class should have only one reason to change, focusing on a single \nresponsibility\n\nAdvantages:\n\n\uf075"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Single Responsibility Principle",
+        "explanation": "\uf075 Let\u2019s analyze the following example that violates Single Responsibility Principle string model; double fuelUsed; double distanceDriven; Car(string m, double f, double d) : model(m), fuelUsed(f), distanceDriven(d) {} double compute_efficiency() const { return distanceDriven / fuelUsed;",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\n#include <iostream>\n\nclass Car {\nstring model;\ndouble fuelUsed;\ndouble distanceDriven;\n\npublic:\nCar(string m, double f, double d)\n: model(m), fuelUsed(f), distanceDriven(d) {}\n\ndouble compute_efficiency() const {\nreturn distanceDriven / fuelUsed;\n}\n\nvoid save(const string& filename) {\nstd::cout << \"Save: \" << filename << std::endl;\n}\n\nvoid print_to_screen() const {\nstd::cout << \"Car: \" << this->model << std::endl;\n}\n};\n int main() {\nCar c(\"Dacia\", 100, 1.5);\nc.save(\"car.dat\");\nc.print_to_screen();\n}\n Output:\nSave: car.dat\nCar: Dacia"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Single Responsibility Principle",
+        "explanation": "\uf075 Let\u2019s analyze the following example that violates Single Responsibility Principle string model; double fuelUsed; double distanceDriven; Car(string m, double f, double d) : model(m), fuelUsed(f), distanceDriven(d) {} double compute_efficiency() const { return distanceDriven / fuelUsed;",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\n#include <iostream>\n\nclass Car {\nstring model;\ndouble fuelUsed;\ndouble distanceDriven;\n\npublic:\nCar(string m, double f, double d)\n: model(m), fuelUsed(f), distanceDriven(d) {}\n\ndouble compute_efficiency() const {\nreturn distanceDriven / fuelUsed;\n}\n\nvoid save(const string& filename) {\nstd::cout << \"Save: \" << filename << std::endl;\n}\n\nvoid print_to_screen() const {\nstd::cout << \"Car: \" << this->model << std::endl;\n}\n};\n int main() {\nCar c(\"Dacia\", 100, 1.5);\nc.save(\"car.dat\");\nc.print_to_screen();\n}\n Output:\nSave: car.dat\nCar: Dacia"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "This methods are not relevant for a Car and",
+        "explanation": "imply additional tasks / responsibility for the  Car class. The class has the following  functionalities: \u2022 Managing state \u2022 Compute efficiently \u2022 Serialization support \u2022 Print to screen",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class has the following \nfunctionalities:\n\u2022 Managing state\n\u2022 Compute efficiently\n\u2022 Serialization support\n\u2022 Print to screen"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Single Responsibility Principle",
+        "explanation": "\uf075 Let\u2019s see the correct implementation of the previous problem so that the Single  Responsibility Principle is respected: string model; double fuelUsed; double distanceDriven; Car(string m, double f, double d) : model(m), fuelUsed(f), distanceDriven(d) {} string get_model() const { return model; }",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\n#include <iostream>\n\nclass Car {\nstring model;\ndouble fuelUsed;\ndouble distanceDriven;\n\npublic:\nCar(string m, double f, double d)\n: model(m), fuelUsed(f), distanceDriven(d) {}\n\nstring get_model() const { return model; }\ndouble get_fuel_used() const { return fuelUsed; }\ndouble get_distance_driven() const { \nreturn distanceDriven; \n}\n};\nstruct EfficiencyCalculator {\ndouble calculate(const Car& car) const {\nreturn car.get_distance_driven() / \ncar.get_fuel_used();\n}\n};\n struct Serializer {\nvoid save(Car& car, string& filename) {\nstd::cout << \"Save : \" << filename\n<< std::endl;\n}\n};\n\nstruct Printer {\nvoid print(const Car& car) const {\nstd::cout << \"Car : \" \n<< car.get_model() \n<< std::endl;\n}\n};\n\nint main() {\nCar c(\"Dacia\", 100, 1.5);\nSerializer s;\nPrinter p;\ns.save(c, \u00ab car.dat\");\np.print(c);\n}\n Output:\nSave: car.dat\nCar: Dacia"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Each functionality \nis in its own class\n\nOpen-Close Principle",
+        "explanation": "\uf075 \u201cSoftware entities (such as modules, classes, functions, etc.) should be open  for extension but closed for modification\u201d Advantages: \uf075 Reduces the risk of breaking existing code \uf075 Code reuse via polymorphism \uf075 Easily to maintain \uf075 Support for plug-ins",
+        "code_examples": [
+          {
+            "title": "SOLID Principles",
+            "code": "#include <iostream>\nusing namespace std;\n\nclass Shape {\npublic:\n    virtual double area() = 0;\n    virtual ~Shape() {}\n};\n\nclass Circle : public Shape {\n    double radius;\npublic:\n    Circle(double r) : radius(r) {}\n    double area() { return 3.14 * radius * radius; }\n};\n\nint main() {\n    Circle c(5);\n    cout << \"Circle area: \" << c.area() << endl;\n    return 0;\n}"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Open-Close Principle",
+        "explanation": "\uf075 Let\u2019s analyze the following example that breaks open-close principle: enum class ShapeType { ShapeType type; double dim1, dim2; Shape(ShapeType t, double d1, double d2 = 0) :  type(t), dim1(d1), dim2(d2) {} double area() { switch (type) {",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\n#include <iostream>\n\nenum class ShapeType {\nCircle,\nRectangle,\n};\n\nclass Shape {\nShapeType type;\ndouble dim1, dim2;\npublic:\nShape(ShapeType t, double d1, double d2 = 0) : \ntype(t), dim1(d1), dim2(d2) {}\ndouble area() {\nswitch (type) {\ncase ShapeType::Circle:\nreturn 3.14 * dim1 * dim1;\ncase ShapeType::Rectangle:\nreturn dim1 * dim2;\ndefault:\nreturn 0.0;\n}\n}\n};\n int main() {\nShape c(ShapeType::Circle, 5);\nShape r(ShapeType::Rectangle, 5, 4);\nstd::cout << c.area() << std::endl;\nstd::cout << r.area() << std::endl;\nreturn 0;\n}\n Output:\n78.5\n20"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Open-Close Principle",
+        "explanation": "\uf075 Let\u2019s analyze the following example that breaks open-close principle: enum class ShapeType {",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "App.cpp\n\n#include <iostream>\n\nenum class ShapeType {\nCircle,\nRectangle,"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      },
+      {
+        "name": "Square",
+        "explanation": "Shape(ShapeType t, double d1, double d2 = 0) {\u2026} double area() { switch (type) { case ShapeType::Circle: return 3.14 * dim1 * dim1; case ShapeType::Rectangle: return dim1 * dim2; return 0.0;",
+        "code_examples": [
+          {
+            "title": "Example 1",
+            "code": "class Shape {\n\u2026\npublic:\nShape(ShapeType t, double d1, double d2 = 0) {\u2026}\ndouble area() {\nswitch (type) {\ncase ShapeType::Circle:\nreturn 3.14 * dim1 * dim1;\ncase ShapeType::Rectangle:\nreturn dim1 * dim2;\ndefault:\nreturn 0.0;\n}\n}\n};\n int main() {\nShape c(ShapeType::Circle, 5);\nShape r(ShapeType::Rectangle, 5, 4);\nstd::cout << c.area() << std::endl;\nstd::cout << r.area() << std::endl;\nreturn 0;\n}\n Output:\n78.5\n20\n\nLet\u2019s assume that we want to \nadd another shape: Square"
+          }
+        ],
+        "fill_in": {
+          "starter_code": "// TODO: Implement the concept here\nint result = 0;",
+          "test_harness": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int result = 0;\n    if (result == 0) {\n        cout << \"ALL TESTS PASSED\" << endl;\n    }\n    return 0;\n}"
+        }
+      }
+    ]
+  }
+]

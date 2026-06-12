@@ -60,9 +60,11 @@ export default function ProblemCard({ exercise }: Props) {
 
       {exercise.hints.length > 0 && (
         <div>
-          <button
+          <motion.button
             onClick={() => setHintsOpen(!hintsOpen)}
-            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-amber-400 transition-colors"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.96 }}
+            className="editor-btn editor-btn--ghost"
           >
             <Lightbulb size={12} />
             <span>Hints ({exercise.hints.length})</span>
@@ -72,7 +74,7 @@ export default function ProblemCard({ exercise }: Props) {
             >
               <ChevronDown size={12} />
             </motion.span>
-          </button>
+          </motion.button>
           <AnimatePresence>
             {hintsOpen && (
               <motion.div
@@ -82,17 +84,13 @@ export default function ProblemCard({ exercise }: Props) {
                 transition={{ duration: 0.2 }}
                 className="overflow-hidden"
               >
-                <div className="mt-2 flex flex-col gap-1.5">
+                <div className="mt-2 flex flex-col gap-2">
                   {exercise.hints.map((hint, i) => (
                     <div
                       key={i}
-                      className="text-xs text-amber-200/70 px-3 py-1.5 rounded-lg"
-                      style={{
-                        background: "rgba(251,191,36,0.05)",
-                        border: "1px solid rgba(251,191,36,0.15)",
-                      }}
+                      className="text-xs text-indigo-200/70 px-4 py-2 rounded-lg glass-panel"
                     >
-                      <span className="text-amber-400 mr-1.5">#{i + 1}</span>
+                      <span className="text-indigo-400 mr-2 font-semibold">#{i + 1}</span>
                       {hint}
                     </div>
                   ))}

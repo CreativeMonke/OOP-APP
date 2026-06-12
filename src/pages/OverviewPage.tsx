@@ -183,13 +183,13 @@ export default function OverviewPage() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="h-full w-full overflow-y-auto"
+      className="h-full w-full overflow-y-auto flex flex-col items-center"
     >
       <motion.div
         variants={staggerContainer}
         initial="initial"
         animate="animate"
-        className="mx-auto w-full flex flex-col gap-7"
+        className="w-full flex flex-col gap-7"
         style={{ maxWidth: 1080, padding: "36px 40px 64px" }}
       >
         {/* Header */}

@@ -54,7 +54,7 @@ export default function StreakBadges({ lastActiveDate, courseStats, passedExerci
   const badges = getBadges(courseStats, passedExercises, quizScores);
 
   return (
-    <div className="glass-panel rounded-xl" style={{ padding: "22px 26px" }}>
+    <div className="glass-panel rounded-xl h-full" style={{ padding: "22px 26px" }}>
       <div className="flex items-center gap-3 mb-4">
         <div className="flex items-center gap-2">
           <Flame size={16} className={streak > 0 ? "text-amber-400" : "text-slate-600"} />

@@ -12,8 +12,10 @@ import {
 import "@xyflow/react/dist/base.css";
 import { useNavigate } from "react-router-dom";
 import { Code2 } from "lucide-react";
+import dagre from "@dagrejs/dagre";
 import { useProgressStore } from "@/store/useProgressStore";
 import { useAppStore } from "@/store/useAppStore";
+import RootNodeComponent from "./RootNode";
 import CourseNodeComponent from "./CourseNode";
 import ConceptNodeComponent from "./ConceptNode";
 import type { Course } from "@/types";
@@ -26,33 +28,37 @@ interface ConceptTreeProps {
 }
 
 const nodeTypes: NodeTypes = {
+  root: RootNodeComponent,
   course: CourseNodeComponent,
   concept: ConceptNodeComponent,
 };
 
-const VIEW_W = 960;
-const ROOT_Y = 8;
-const ROOT_W = 130;
-const ROOT_H = 40;
+const ROOT_W = 140;
+const ROOT_H = 44;
+const COURSE_W = 170;
+const CONCEPT_W = 150;
+const CONCEPT_H = 26;
 
-const COLS = 4;
-const ROWS = 3;
-const COURSE_W = 180;
-const COURSE_GAP_X = 24;
-const COURSE_GAP_Y = 80;
-
-const CONCEPT_W = 160;
-const CONCEPT_GAP = 38;
-
-const TOTAL_COURSE_W = COLS * COURSE_W + (COLS - 1) * COURSE_GAP_X;
-const START_X = (VIEW_W - TOTAL_COURSE_W) / 2;
-
-function courseX(col: number) {
-  return START_X + col * (COURSE_W + COURSE_GAP_X);
-}
-
-function courseY(row: number) {
-  return ROOT_Y + ROOT_H + 22 + row * COURSE_GAP_Y;
+function conceptLayout(cx: number, cy: number, count: number): { x: number; y: number }[] {
+  const g = new dagre.graphlib.Graph();
+  g.setGraph({ rankdir: "TB", nodesep: 6, ranksep: 32, marginx: 0, marginy: 0 });
+  g.setDefaultEdgeLabel(() => ({}));
+  g.setNode("_p", { width: COURSE_W, height: 40 });
+  for (let i = 0; i < count; i++) {
+    g.setNode(`_c${i}`, { width: CONCEPT_W, height: CONCEPT_H });
+    g.setEdge("_p", `_c${i}`);
+  }
+  dagre.layout(g);
+  const pPos = g.node("_p");
+  const positions: { x: number; y: number }[] = [];
+  for (let i = 0; i < count; i++) {
+    const pos = g.node(`_c${i}`);
+    positions.push({
+      x: cx + COURSE_W / 2 + (pos.x - pPos.x) - CONCEPT_W / 2,
+      y: cy + 50 + (pos.y - pPos.y),
+    });
+  }
+  return positions;
 }
 
 function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: ConceptTreeProps) {
@@ -75,38 +81,32 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
     [navigate, setActiveCourse, setActiveConceptIndex]
   );
 
+      const COLS = 4;
+      const GAP_X = 28;
+  const GAP_Y = 90;
+  const VIEW_W = 960;
+  const totalW = COLS * COURSE_W + (COLS - 1) * GAP_X;
+  const startX = (VIEW_W - totalW) / 2;
+  const cx = (col: number) => startX + col * (COURSE_W + GAP_X);
+  const cy = (row: number) => ROOT_H + 36 + row * GAP_Y;
+
   const { nodes, edges } = useMemo(() => {
     const result: Node[] = [];
     const edgeList: Edge[] = [];
-    // Root node
+
     result.push({
       id: "root",
-      type: "default",
-      position: { x: VIEW_W / 2 - ROOT_W / 2, y: ROOT_Y },
-      data: { label: "" },
-      style: {
-        width: ROOT_W,
-        height: ROOT_H,
-        background: "linear-gradient(135deg, rgba(129,140,248,0.2), rgba(103,232,249,0.1))",
-        border: "1px solid rgba(129,140,248,0.25)",
-        borderRadius: 12,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 8,
-        color: "#e2e8f0",
-        fontSize: 12,
-        fontWeight: 700,
-        letterSpacing: "0.02em",
-        boxShadow: "0 0 24px rgba(129,140,248,0.15)",
-      },
+      type: "root",
+      position: { x: VIEW_W / 2 - ROOT_W / 2, y: 8 },
+      data: {},
     });
+
     courses.forEach((course) => {
-      const courseIndex = course.id - 1;
-      const col = courseIndex % COLS;
-      const row = Math.floor(courseIndex / COLS);
-      const cx = courseX(col);
-      const cy = courseY(row);
+      const idx = course.id - 1;
+      const col = idx % COLS;
+      const row = Math.floor(idx / COLS);
+      const x = cx(col);
+      const y = cy(row);
       const stats = courseStats.find((s) => s.id === course.id);
       const done = stats?.done ?? 0;
       const total = stats?.total ?? course.concepts.length;
@@ -118,16 +118,14 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
           ? nextConcept.conceptIndex
           : null;
 
-      const courseNodeId = `course-${course.id}`;
+      const nid = `c-${course.id}`;
       result.push({
-        id: courseNodeId,
+        id: nid,
         type: "course",
-        position: { x: cx, y: cy },
+        position: { x, y },
         data: {
           courseId: course.id,
           title: course.title,
-          done,
-          total,
           pct: total ? (done / total) * 100 : 0,
           conceptCompletions,
           isExpanded: expandedCourseId === course.id,
@@ -136,62 +134,59 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
         },
       });
 
-      // Edge from root to course
       edgeList.push({
-        id: `e-root-${courseNodeId}`,
+        id: `e-root-${nid}`,
         source: "root",
-        target: courseNodeId,
+        target: nid,
+        sourceHandle: null,
+        targetHandle: null,
         type: "smoothstep",
         style: {
-          stroke: nextCi !== null ? "rgba(129,140,248,0.2)" : "rgba(255,255,255,0.06)",
+          stroke: nextCi !== null
+            ? "rgba(129,140,248,0.22)"
+            : "rgba(255,255,255,0.06)",
           strokeWidth: nextCi !== null ? 1.5 : 1,
         },
         animated: nextCi !== null,
       });
 
-      // Expanded concepts
       if (expandedCourseId === course.id) {
-        const conceptsStartY = courseY(ROWS - 1) + COURSE_GAP_Y;
-        const conceptBaseX = cx + COURSE_W / 2 - CONCEPT_W / 2;
-
+        const cpts = conceptLayout(x, y, course.concepts.length);
         course.concepts.forEach((concept, ci) => {
-          const conceptKey = `${course.id}-${ci}`;
-          const completed = completedConcepts.has(conceptKey);
-          const isNext = nextCi === ci;
-          const isWeak = weakConcepts.has(conceptKey);
+          const ck = `${course.id}-${ci}`;
+          const comp = completedConcepts.has(ck);
+          const nxt = nextCi === ci;
+          const w = weakConcepts.has(ck);
+          const p = cpts[ci];
 
-          const conceptNodeId = `concept-${course.id}-${ci}`;
           result.push({
-            id: conceptNodeId,
+            id: `cpt-${course.id}-${ci}`,
             type: "concept",
-            position: {
-              x: conceptBaseX,
-              y: conceptsStartY + ci * CONCEPT_GAP,
-            },
+            position: p,
             data: {
               conceptIndex: ci,
               name: concept.name,
-              completed,
-              isNext,
-              isWeak,
+              completed: comp,
+              isNext: nxt,
+              isWeak: w,
               onClick: () => handleConceptClick(course.id, ci),
             },
           });
 
           edgeList.push({
-            id: `e-${courseNodeId}-${conceptNodeId}`,
-            source: courseNodeId,
-            target: conceptNodeId,
+            id: `e-${nid}-cpt-${ci}`,
+            source: nid,
+            target: `cpt-${course.id}-${ci}`,
             type: "smoothstep",
             style: {
-              stroke: completed
-                ? "rgba(52,211,153,0.15)"
-                : isNext
-                  ? "rgba(129,140,248,0.25)"
+              stroke: comp
+                ? "rgba(52,211,153,0.18)"
+                : nxt
+                  ? "rgba(129,140,248,0.28)"
                   : "rgba(255,255,255,0.05)",
               strokeWidth: 1,
             },
-            animated: isNext,
+            animated: nxt,
           });
         });
       }
@@ -202,22 +197,30 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
 
   useEffect(() => {
     if (expandedCourseId !== null && reactFlowInstance) {
-      const timeout = setTimeout(() => {
+      const t = setTimeout(() => {
         reactFlowInstance.fitView({ duration: 350, padding: 0.25 });
-      }, 60);
-      return () => clearTimeout(timeout);
+      }, 80);
+      return () => clearTimeout(t);
     }
   }, [expandedCourseId, reactFlowInstance]);
 
+  const expanded = expandedCourseId !== null;
+
   return (
-    <div className="glass-panel rounded-xl overflow-hidden" style={{ height: expandedCourseId !== null ? 620 : 460, transition: "height 0.35s cubic-bezier(0.22, 1, 0.36, 1)" }}>
+    <div
+      className="glass-panel rounded-xl overflow-hidden"
+      style={{
+        height: expanded ? 640 : 460,
+        transition: "height 0.35s cubic-bezier(0.22, 1, 0.36, 1)",
+      }}
+    >
       <div className="px-4 pt-3 pb-1 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Code2 size={14} className="text-indigo-400" />
           <h3 className="text-sm font-semibold text-white">Concept tree</h3>
         </div>
         <span className="text-[10px] text-slate-500">
-          {expandedCourseId !== null ? "click course to collapse" : "click a course to expand"}
+          {expanded ? "click course to collapse" : "click a course to expand"}
         </span>
       </div>
       <ReactFlow
@@ -226,7 +229,7 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
         nodeTypes={nodeTypes}
         fitView
         proOptions={{ hideAttribution: true }}
-        minZoom={0.3}
+        minZoom={0.25}
         maxZoom={2}
         panOnDrag
         zoomOnScroll
@@ -234,12 +237,19 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
           type: "smoothstep",
           style: { stroke: "rgba(255,255,255,0.06)", strokeWidth: 1 },
         }}
+        connectionLineStyle={{ stroke: "transparent" }}
       >
         <Background gap={28} size={1} color="rgba(255,255,255,0.03)" />
         <Controls
           showInteractive={false}
-          className="!bg-transparent !border-none"
-          style={{ gap: 4 }}
+          position="bottom-left"
+          style={{
+            display: "flex",
+            gap: 4,
+            background: "transparent",
+            border: "none",
+            boxShadow: "none",
+          }}
         />
       </ReactFlow>
     </div>

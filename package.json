@@ -12,6 +12,7 @@
 		"tauri:build": "tauri build"
 	},
 	"dependencies": {
+		"@dagrejs/dagre": "^3.0.0",
 		"@monaco-editor/react": "^4.6.0",
 		"@tailwindcss/typography": "^0.5.20",
 		"@tauri-apps/api": "^2.0.0",

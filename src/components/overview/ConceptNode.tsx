@@ -6,6 +6,7 @@ interface ConceptNodeData extends Record<string, unknown> {
   name: string;
   completed: boolean;
   isNext: boolean;
+  isWeak: boolean;
   onClick: () => void;
 }
 
@@ -18,7 +19,7 @@ function ConceptNodeComponent({ data }: NodeProps<ConceptNodeType>) {
     <div
       className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg cursor-pointer transition-all duration-200 select-none"
       style={{
-        width: 160,
+        width: 150,
         background: isNext
           ? "rgba(129,140,248,0.15)"
           : completed
@@ -51,7 +52,16 @@ function ConceptNodeComponent({ data }: NodeProps<ConceptNodeType>) {
         e.currentTarget.style.transform = "translateX(0)";
       }}
     >
-      <Handle type="target" position={Position.Top} style={{ opacity: 0 }} />
+      <Handle
+        type="target"
+        position={Position.Top}
+        style={{
+          width: 0,
+          height: 0,
+          background: "transparent",
+          border: "none",
+        }}
+      />
       <div
         className="w-4 h-4 rounded flex items-center justify-center text-[8px] font-bold shrink-0"
         style={{

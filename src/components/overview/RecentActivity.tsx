@@ -31,7 +31,7 @@ function formatTime(ts: number): string {
 export default function RecentActivity({ actions }: RecentActivityProps) {
   if (actions.length === 0) {
     return (
-      <div className="glass-panel rounded-xl" style={{ padding: "22px 26px" }}>
+      <div className="glass-panel rounded-xl h-full" style={{ padding: "22px 26px" }}>
         <h3 className="text-sm font-semibold text-white mb-4">Recent activity</h3>
         <div className="flex items-center justify-center py-6">
           <span className="text-xs text-slate-600">No activity yet</span>
@@ -41,7 +41,7 @@ export default function RecentActivity({ actions }: RecentActivityProps) {
   }
 
   return (
-    <div className="glass-panel rounded-xl" style={{ padding: "22px 26px" }}>
+    <div className="glass-panel rounded-xl h-full" style={{ padding: "22px 26px" }}>
       <h3 className="text-sm font-semibold text-white mb-4">Recent activity</h3>
       <div className="flex flex-col gap-2.5">
         {actions.slice(0, 8).map((a, i) => {

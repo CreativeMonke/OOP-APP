@@ -12,7 +12,7 @@ export default function ContinueCard({ nextConcept }: ContinueCardProps) {
 
   if (!nextConcept) {
     return (
-      <div className="glass-panel rounded-xl flex items-center justify-center flex-col gap-2" style={{ padding: 24 }}>
+      <div className="glass-panel rounded-xl flex items-center justify-center flex-col gap-2 h-full" style={{ padding: 24 }}>
         <Sparkles size={28} className="text-emerald-400" />
         <span className="text-sm font-medium text-white">All concepts complete!</span>
         <span className="text-xs text-slate-500">You've mastered the course</span>
@@ -27,7 +27,7 @@ export default function ContinueCard({ nextConcept }: ContinueCardProps) {
   };
 
   return (
-    <div className="glass-panel rounded-xl flex flex-col gap-3" style={{ padding: "20px 24px" }}>
+    <div className="glass-panel rounded-xl flex flex-col gap-3 h-full" style={{ padding: "20px 24px" }}>
       <div className="flex items-center gap-2">
         <div className="w-7 h-7 rounded-lg flex items-center justify-center"
           style={{ background: "rgba(129,140,248,0.15)", color: "#818cf8" }}

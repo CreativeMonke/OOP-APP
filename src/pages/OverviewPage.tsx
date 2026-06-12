@@ -274,7 +274,7 @@ export default function OverviewPage() {
         </motion.div>
 
         {/* Gauge + Continue card */}
-        <div className="grid gap-4" style={{ gridTemplateColumns: "320px 1fr" }}>
+        <div className="grid gap-4 items-stretch" style={{ gridTemplateColumns: "320px 1fr" }}>
           <motion.div
             variants={staggerItem}
             className="glass-panel rounded-xl flex flex-col items-center justify-center"
@@ -282,7 +282,7 @@ export default function OverviewPage() {
           >
             <RadialGauge pct={overallPct} />
           </motion.div>
-          <motion.div variants={staggerItem}>
+          <motion.div variants={staggerItem} className="h-full">
             <ContinueCard nextConcept={nextConcept} />
           </motion.div>
         </div>
@@ -298,19 +298,19 @@ export default function OverviewPage() {
         </motion.div>
 
         {/* Recent activity + Difficulty donut */}
-        <div className="grid gap-4" style={{ gridTemplateColumns: "1fr 380px" }}>
-          <motion.div variants={staggerItem}>
+        <div className="grid gap-4 items-stretch" style={{ gridTemplateColumns: "1fr 380px" }}>
+          <motion.div variants={staggerItem} className="h-full">
             <RecentActivity actions={recentActions} />
           </motion.div>
-          <motion.div variants={staggerItem} className="glass-panel rounded-xl" style={{ padding: "22px 26px" }}>
+          <motion.div variants={staggerItem} className="glass-panel rounded-xl h-full" style={{ padding: "22px 26px" }}>
             <h3 className="text-sm font-semibold text-white mb-5">Exercises by difficulty</h3>
             <DifficultyDonut data={difficultyData} />
           </motion.div>
         </div>
 
         {/* Streak + badges + Category bars */}
-        <div className="grid gap-4" style={{ gridTemplateColumns: "1fr 1fr" }}>
-          <motion.div variants={staggerItem}>
+        <div className="grid gap-4 items-stretch" style={{ gridTemplateColumns: "1fr 1fr" }}>
+          <motion.div variants={staggerItem} className="h-full">
             <StreakBadges
               lastActiveDate={lastActiveDate}
               courseStats={courseStats}
@@ -318,7 +318,7 @@ export default function OverviewPage() {
               quizScores={quizScores}
             />
           </motion.div>
-          <motion.div variants={staggerItem} className="glass-panel rounded-xl" style={{ padding: "22px 26px" }}>
+          <motion.div variants={staggerItem} className="glass-panel rounded-xl h-full" style={{ padding: "22px 26px" }}>
             <h3 className="text-sm font-semibold text-white mb-5">Exercise categories</h3>
             <CategoryBars data={categoryStats} />
           </motion.div>

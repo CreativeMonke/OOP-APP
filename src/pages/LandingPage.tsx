@@ -143,6 +143,9 @@ export default function LandingPage() {
         ))}
       </motion.div>
 
+      {/* Window drag handle — invisible strip at the top */}
+      <div data-tauri-drag-region className="absolute top-0 left-0 right-0 z-30" style={{ height: 36 }} />
+
       {/* Occasional scanline pass over everything */}
       <div className="hero-scanline" />
 

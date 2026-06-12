@@ -213,12 +213,10 @@ export default function ExercisePage() {
             exit="exit"
             className="flex-1 flex flex-col overflow-hidden"
           >
-            {/* Problem description — scrollable */}
+            {/* Problem description */}
             <div
-              className="shrink-0 overflow-y-auto"
               style={{
                 borderBottom: "1px solid rgba(255,255,255,0.07)",
-                maxHeight: "40%",
               }}
             >
               <ProblemCard exercise={exercise} />

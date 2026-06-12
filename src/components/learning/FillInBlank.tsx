@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
+import { Play, Edit3 } from "lucide-react";
 import Editor from "@monaco-editor/react";
 import type * as Monaco from "monaco-editor";
 import { OOP_DARK_THEME, defineOopDarkTheme } from "@/lib/monacoTheme";
@@ -55,20 +55,32 @@ export default function FillInBlank({ starterCode, testHarness, onPassed, storag
         className="flex items-center justify-between px-5 py-3"
         style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
       >
-        <span className="text-sm font-medium text-white flex items-center gap-2">
-          Fill in the blank
+        <div className="flex items-center gap-3">
+          <div
+            className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+            style={{
+              background: "rgba(99,102,241,0.15)",
+              border: "1px solid rgba(129,140,248,0.3)",
+              boxShadow: "0 0 12px rgba(99,102,241,0.12)",
+            }}
+          >
+            <Edit3 size={13} style={{ color: "#818cf8" }} />
+          </div>
+          <span className="text-sm font-medium text-white">Fill in the blank</span>
+        </div>
+        <div className="flex items-center gap-2">
           {hasPassed && <span className="exercise-badge-passed">✓ Passed</span>}
-        </span>
-        <motion.button
-          onClick={handleRun}
-          disabled={isRunning}
-          whileHover={isRunning ? {} : { scale: 1.03 }}
-          whileTap={isRunning ? {} : { scale: 0.95 }}
-          className={`editor-btn editor-btn--primary text-[11px] ${isRunning ? "is-running" : ""}`}
-        >
-          <Play size={12} fill={isRunning ? "none" : "currentColor"} />
-          {isRunning ? "Running…" : "Run & Check"}
-        </motion.button>
+          <motion.button
+            onClick={handleRun}
+            disabled={isRunning}
+            whileHover={isRunning ? {} : { scale: 1.03 }}
+            whileTap={isRunning ? {} : { scale: 0.95 }}
+            className={`editor-btn editor-btn--primary text-[11px] ${isRunning ? "is-running" : ""}`}
+          >
+            <Play size={12} fill={isRunning ? "none" : "currentColor"} />
+            {isRunning ? "Running…" : "Run & Check"}
+          </motion.button>
+        </div>
       </div>
 
       <div

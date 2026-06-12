@@ -21,11 +21,21 @@ export default function CodeExample({ title, code, exampleNumber }: Props) {
         className="flex items-center justify-between px-5 py-3"
         style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
       >
-        <div className="flex items-center gap-2.5">
-          <span className="text-xs text-slate-500">Example {exampleNumber}</span>
-          <span className="text-xs text-white font-medium">{title}</span>
+        <div className="flex items-center gap-3">
+          <div
+            className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0"
+            style={{
+              background: "rgba(99,102,241,0.15)",
+              border: "1px solid rgba(129,140,248,0.3)",
+              color: "#818cf8",
+              boxShadow: "0 0 12px rgba(99,102,241,0.12)",
+            }}
+          >
+            {exampleNumber}
+          </div>
+          <span className="text-sm font-medium text-white">{title}</span>
         </div>
-        <span className="text-xs text-slate-600 font-mono">C++17</span>
+        <span className="text-sm text-slate-500 font-mono">C++17</span>
       </div>
       <div className="relative rounded-b-xl">
         <div className="rounded-b-xl overflow-hidden editor-glass">

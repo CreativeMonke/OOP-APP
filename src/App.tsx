@@ -38,7 +38,7 @@ export default function App() {
   const showTopBar = location.pathname !== "/";
 
   return (
-    <div className="flex flex-col h-full w-full main-shell">
+    <div className="flex flex-col h-full w-full main-shell" data-tauri-drag-region>
       {/* Background atmosphere: liquid gradients, orbs, dust, grid, specular */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="liquid-glass-bg" />
@@ -59,7 +59,7 @@ export default function App() {
         <div className="glass-grain" />
       </div>
 
-      <div className="relative z-10 flex flex-col h-full">
+      <div className="relative z-10 flex flex-col h-full" style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}>
         {showTopBar && <TopBar />}
 
         <div className="flex-1 overflow-hidden">

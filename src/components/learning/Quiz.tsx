@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, XCircle, ChevronRight, RotateCcw } from "lucide-react";
+import { CheckCircle2, XCircle, ChevronRight, RotateCcw, HelpCircle } from "lucide-react";
 import type { QuizQuestion } from "@/types";
 import { quizShakeVariants, quizCorrectVariants } from "@/lib/animations";
 
@@ -126,9 +126,21 @@ export default function Quiz({ questions, onAllPassed, storageKey }: Props) {
         className="flex items-center justify-between"
         style={{ padding: "16px 24px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
       >
-        <span className="text-sm font-medium text-white">
-          Quiz — Question {current + 1}/{questions.length}
-        </span>
+        <div className="flex items-center gap-3">
+          <div
+            className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+            style={{
+              background: "rgba(99,102,241,0.15)",
+              border: "1px solid rgba(129,140,248,0.3)",
+              boxShadow: "0 0 12px rgba(99,102,241,0.12)",
+            }}
+          >
+            <HelpCircle size={13} style={{ color: "#818cf8" }} />
+          </div>
+          <span className="text-sm font-medium text-white">
+            Quiz — Question {current + 1}/{questions.length}
+          </span>
+        </div>
         <div className="flex gap-1.5">
           {questions.map((_, i) => (
             <span

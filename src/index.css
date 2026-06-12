@@ -407,6 +407,37 @@ body,
   animation: breathe-glow 3.2s ease-in-out infinite;
 }
 
+/* ── Hint item gloss sweep (same light-sheen as editor-btn) ── */
+.hint-gloss {
+  position: relative;
+  overflow: hidden;
+}
+.hint-gloss::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: -80%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+.hint-gloss:hover::before {
+  left: 120%;
+}
+.hint-gloss > * {
+  position: relative;
+  z-index: 1;
+}
+
 /* ── Step labels (Learn page sections) ── */
 .step-label {
   display: flex;
@@ -417,13 +448,13 @@ body,
 }
 .step-label-number {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: rgba(129, 140, 248, 0.75);
   letter-spacing: 0.08em;
 }
 .step-label-title {
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;

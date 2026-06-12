@@ -46,7 +46,7 @@ export default function ProblemCard({ exercise }: Props) {
           <div className="flex items-center gap-3 mb-3 flex-wrap">
             <h2 className="text-xl font-bold text-white">{exercise.title}</h2>
             <span
-              className="text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wide"
+              className="text-sm px-3 py-1 rounded-full font-medium uppercase tracking-wider"
               style={{ background: d.bg, border: `1px solid ${d.border}`, color: d.color }}
             >
               {exercise.difficulty}
@@ -59,22 +59,33 @@ export default function ProblemCard({ exercise }: Props) {
       </div>
 
       {exercise.hints.length > 0 && (
-        <div>
-          <motion.button
+        <div className="rounded-xl glass-panel overflow-hidden">
+          <button
             onClick={() => setHintsOpen(!hintsOpen)}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.96 }}
-            className="editor-btn editor-btn--ghost"
+            className="flex items-center justify-between w-full"
+            style={{
+              padding: "14px 20px",
+              borderBottom: hintsOpen ? "1px solid rgba(255,255,255,0.08)" : "none",
+              background: "none",
+              border: "none",
+              color: "inherit",
+              font: "inherit",
+              cursor: "pointer",
+              outline: "none",
+            }}
           >
-            <Lightbulb size={12} />
-            <span>Hints ({exercise.hints.length})</span>
+            <span className="text-sm font-medium text-white flex items-center gap-2">
+              <Lightbulb size={14} />
+              Hints ({exercise.hints.length})
+            </span>
             <motion.span
               animate={{ rotate: hintsOpen ? 180 : 0 }}
               transition={{ duration: 0.15 }}
+              style={{ color: "rgba(255,255,255,0.3)", flexShrink: 0 }}
             >
-              <ChevronDown size={12} />
+              <ChevronDown size={14} />
             </motion.span>
-          </motion.button>
+          </button>
           <AnimatePresence>
             {hintsOpen && (
               <motion.div
@@ -84,15 +95,25 @@ export default function ProblemCard({ exercise }: Props) {
                 transition={{ duration: 0.2 }}
                 className="overflow-hidden"
               >
-                <div className="mt-2 flex flex-col gap-2">
+                <div className="flex flex-col gap-3" style={{ padding: "16px 20px 20px" }}>
                   {exercise.hints.map((hint, i) => (
-                    <div
+                    <motion.div
                       key={i}
-                      className="text-xs text-indigo-200/70 px-4 py-2 rounded-lg glass-panel"
+                      whileHover={{ x: 4, borderLeftColor: "rgba(129,140,248,0.7)" }}
+                      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+                      className="text-sm text-slate-300 leading-relaxed rounded-lg hint-gloss"
+                      style={{
+                        padding: "12px 16px",
+                        background: "rgba(255,255,255,0.025)",
+                        borderLeft: "2px solid rgba(129,140,248,0.3)",
+                        borderTop: "1px solid rgba(255,255,255,0.06)",
+                        borderRight: "1px solid rgba(255,255,255,0.06)",
+                        borderBottom: "1px solid rgba(255,255,255,0.06)",
+                      }}
                     >
-                      <span className="text-indigo-400 mr-2 font-semibold">#{i + 1}</span>
-                      {hint}
-                    </div>
+                      <span className="text-indigo-400 font-semibold mr-2">#{i + 1}</span>
+                      {" "}{hint}
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>

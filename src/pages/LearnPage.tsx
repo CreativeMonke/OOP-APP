@@ -173,7 +173,7 @@ export default function LearnPage() {
     setActiveConceptIndex,
   } = useAppStore();
 
-  const { isConceptComplete, markConceptComplete, setQuizScore } = useProgressStore();
+  const { completedConcepts, markConceptComplete, setQuizScore } = useProgressStore();
   const [quizPassed, setQuizPassed] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
@@ -199,10 +199,7 @@ export default function LearnPage() {
 
   const concept = activeCourse?.concepts?.[activeConceptIndex];
   const conceptKey = `${activeCourseId}-${activeConceptIndex}`;
-  const conceptsDone = useMemo(
-    () => activeCourse?.concepts?.filter((_, i) => isConceptComplete(`${activeCourseId}-${i}`)).length ?? 0,
-    [activeCourse, activeCourseId, isConceptComplete]
-  );
+  const conceptsDone = activeCourse?.concepts?.filter((_, i) => completedConcepts.has(`${activeCourseId}-${i}`)).length ?? 0;
 
   const handleQuizPassed = () => {
     setQuizPassed((p) => ({ ...p, [conceptKey]: true }));

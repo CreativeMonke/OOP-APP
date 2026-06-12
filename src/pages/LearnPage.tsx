@@ -234,13 +234,13 @@ export default function LearnPage() {
         ) : !activeCourse || !activeCourse.concepts || activeCourse.concepts.length === 0 ? (
           <EmptyState />
         ) : concept ? (
-          <div className="flex-1 overflow-y-auto">
+          <div className="flex flex-col items-center flex-1 overflow-y-auto">
             <motion.div
               key={conceptKey}
               variants={staggerContainer}
               initial="initial"
               animate="animate"
-              className="flex flex-col gap-7 mx-auto w-full"
+              className="flex flex-col gap-7 w-full"
               style={{ maxWidth: 880, padding: "36px 40px 64px" }}
             >
               {/* Step 1: Concept explanation */}

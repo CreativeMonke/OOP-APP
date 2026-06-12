@@ -7,6 +7,10 @@ import { pageVariants, staggerContainer, staggerItem } from "@/lib/animations";
 import { EXERCISES, EXERCISE_CATEGORIES, getExercisesByCategory } from "@/data/exercises";
 import type { Course } from "@/types";
 import bundledCourses from "@/data/courses.json";
+import ConceptTree from "@/components/overview/ConceptTree";
+import ContinueCard from "@/components/overview/ContinueCard";
+import RecentActivity from "@/components/overview/RecentActivity";
+import StreakBadges from "@/components/overview/StreakBadges";
 
 const DIFF_COLORS: Record<string, string> = {
   beginner: "#34d399",
@@ -103,7 +107,7 @@ function DifficultyDonut({ data }: { data: Array<{ label: string; passed: number
               style={{ background: d.color, boxShadow: `0 0 8px ${d.color}66` }}
             />
             <span className="text-xs text-slate-300 capitalize w-24">{d.label}</span>
-            <span className="text-xs font-semibold text-white" style={{ fontVariantNumeric: "tabular-nums" }}>
+            <span className="text-xs font-semibold text-white tabular-nums">
               {d.passed}/{d.total}
             </span>
           </div>
@@ -113,9 +117,41 @@ function DifficultyDonut({ data }: { data: Array<{ label: string; passed: number
   );
 }
 
+function CategoryBars({ data }: { data: Array<{ label: string; passed: number; total: number }> }) {
+  return (
+    <div className="flex items-end justify-between gap-4" style={{ height: 130 }}>
+      {data.map((c, i) => {
+        const pct = c.total ? (c.passed / c.total) * 100 : 0;
+        return (
+          <div key={c.label} className="flex-1 flex flex-col items-center gap-2 h-full">
+            <div className="flex-1 w-full max-w-[44px] flex flex-col justify-end rounded-lg overflow-hidden" style={{ background: "rgba(255,255,255,0.05)" }}>
+              <motion.div
+                className="w-full rounded-lg"
+                style={{
+                  background: "linear-gradient(180deg, #67e8f9, #6366f1)",
+                  boxShadow: "0 0 12px rgba(103,232,249,0.3)",
+                }}
+                initial={{ height: 0 }}
+                animate={{ height: `${Math.max(pct, c.passed > 0 ? 8 : 0)}%` }}
+                transition={{ duration: 0.9, delay: 0.25 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </div>
+            <span className="text-[10px] text-slate-500 text-center leading-tight" style={{ maxWidth: 90 }}>
+              {c.label}
+            </span>
+            <span className="text-[10px] font-semibold text-slate-300 tabular-nums">
+              {c.passed}/{c.total}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function OverviewPage() {
   const { courses, setCourses, setCoursesLoading } = useAppStore();
-  const { completedConcepts, passedExercises, quizScores } = useProgressStore();
+  const { completedConcepts, passedExercises, quizScores, recentActions, lastActiveDate } = useProgressStore();
 
   useEffect(() => {
     if (courses.length > 0) return;
@@ -170,6 +206,22 @@ export default function OverviewPage() {
     [passedExercises]
   );
 
+  const nextConcept = useMemo(() => {
+    for (const c of courses) {
+      for (let i = 0; i < c.concepts.length; i++) {
+        if (!completedConcepts.has(`${c.id}-${i}`)) {
+          return {
+            courseId: c.id,
+            conceptIndex: i,
+            courseTitle: c.title,
+            conceptName: c.concepts[i].name.split("\n")[0],
+          };
+        }
+      }
+    }
+    return null;
+  }, [courses, completedConcepts]);
+
   const tiles = [
     { icon: BookOpen, label: "Concepts completed", value: doneConcepts, sub: `of ${totalConcepts}`, color: "#818cf8" },
     { icon: Code2, label: "Exercises passed", value: passedExercises.size, sub: `of ${EXERCISES.length}`, color: "#34d399" },
@@ -189,7 +241,7 @@ export default function OverviewPage() {
         variants={staggerContainer}
         initial="initial"
         animate="animate"
-        className="w-full flex flex-col gap-7"
+        className="w-full flex flex-col gap-6"
         style={{ maxWidth: 1080, padding: "36px 40px 64px" }}
       >
         {/* Header */}
@@ -210,7 +262,7 @@ export default function OverviewPage() {
               </div>
               <div>
                 <div className="flex items-baseline gap-1.5">
-                  <span className="text-2xl font-bold text-white" style={{ fontVariantNumeric: "tabular-nums" }}>
+                  <span className="text-2xl font-bold text-white tabular-nums">
                     {value}
                   </span>
                   <span className="text-xs text-slate-500">{sub}</span>
@@ -221,7 +273,7 @@ export default function OverviewPage() {
           ))}
         </motion.div>
 
-        {/* Gauge + course bars */}
+        {/* Gauge + Continue card */}
         <div className="grid gap-4" style={{ gridTemplateColumns: "320px 1fr" }}>
           <motion.div
             variants={staggerItem}
@@ -230,78 +282,45 @@ export default function OverviewPage() {
           >
             <RadialGauge pct={overallPct} />
           </motion.div>
-
-          <motion.div variants={staggerItem} className="glass-panel rounded-xl" style={{ padding: "22px 26px" }}>
-            <h3 className="text-sm font-semibold text-white mb-4">Course completion</h3>
-            <div className="flex flex-col gap-2.5">
-              {courseStats.map((c, i) => (
-                <div key={c.id} className="flex items-center gap-3">
-                  <span className="text-[11px] text-slate-500 w-4 text-right" style={{ fontVariantNumeric: "tabular-nums" }}>
-                    {c.id}
-                  </span>
-                  <span className="text-xs text-slate-300 truncate" style={{ width: 190 }}>
-                    {c.title}
-                  </span>
-                  <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
-                    <motion.div
-                      className="h-full rounded-full"
-                      style={{
-                        background:
-                          c.pct === 100
-                            ? "linear-gradient(90deg, #34d399, #67e8f9)"
-                            : "linear-gradient(90deg, #6366f1, #818cf8)",
-                        boxShadow: c.pct > 0 ? "0 0 8px rgba(129,140,248,0.4)" : "none",
-                      }}
-                      initial={{ width: 0 }}
-                      animate={{ width: `${c.pct}%` }}
-                      transition={{ duration: 0.9, delay: 0.15 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                    />
-                  </div>
-                  <span className="text-[11px] text-slate-500 w-10" style={{ fontVariantNumeric: "tabular-nums" }}>
-                    {c.done}/{c.total}
-                  </span>
-                </div>
-              ))}
-            </div>
+          <motion.div variants={staggerItem}>
+            <ContinueCard nextConcept={nextConcept} />
           </motion.div>
         </div>
 
-        {/* Difficulty donut + category columns */}
-        <div className="grid gap-4" style={{ gridTemplateColumns: "380px 1fr" }}>
+        {/* ReactFlow Concept Tree */}
+        <motion.div variants={staggerItem}>
+          <ConceptTree
+            courses={courses}
+            courseStats={courseStats}
+            nextConcept={nextConcept ? { courseId: nextConcept.courseId, conceptIndex: nextConcept.conceptIndex } : null}
+            weakConcepts={new Set()}
+          />
+        </motion.div>
+
+        {/* Recent activity + Difficulty donut */}
+        <div className="grid gap-4" style={{ gridTemplateColumns: "1fr 380px" }}>
+          <motion.div variants={staggerItem}>
+            <RecentActivity actions={recentActions} />
+          </motion.div>
           <motion.div variants={staggerItem} className="glass-panel rounded-xl" style={{ padding: "22px 26px" }}>
             <h3 className="text-sm font-semibold text-white mb-5">Exercises by difficulty</h3>
             <DifficultyDonut data={difficultyData} />
           </motion.div>
+        </div>
 
+        {/* Streak + badges + Category bars */}
+        <div className="grid gap-4" style={{ gridTemplateColumns: "1fr 1fr" }}>
+          <motion.div variants={staggerItem}>
+            <StreakBadges
+              lastActiveDate={lastActiveDate}
+              courseStats={courseStats}
+              passedExercises={passedExercises}
+              quizScores={quizScores}
+            />
+          </motion.div>
           <motion.div variants={staggerItem} className="glass-panel rounded-xl" style={{ padding: "22px 26px" }}>
             <h3 className="text-sm font-semibold text-white mb-5">Exercise categories</h3>
-            <div className="flex items-end justify-between gap-4" style={{ height: 130 }}>
-              {categoryStats.map((c, i) => {
-                const pct = c.total ? (c.passed / c.total) * 100 : 0;
-                return (
-                  <div key={c.label} className="flex-1 flex flex-col items-center gap-2 h-full">
-                    <div className="flex-1 w-full max-w-[44px] flex flex-col justify-end rounded-lg overflow-hidden" style={{ background: "rgba(255,255,255,0.05)" }}>
-                      <motion.div
-                        className="w-full rounded-lg"
-                        style={{
-                          background: "linear-gradient(180deg, #67e8f9, #6366f1)",
-                          boxShadow: "0 0 12px rgba(103,232,249,0.3)",
-                        }}
-                        initial={{ height: 0 }}
-                        animate={{ height: `${Math.max(pct, c.passed > 0 ? 8 : 0)}%` }}
-                        transition={{ duration: 0.9, delay: 0.25 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                      />
-                    </div>
-                    <span className="text-[10px] text-slate-500 text-center leading-tight" style={{ maxWidth: 90 }}>
-                      {c.label}
-                    </span>
-                    <span className="text-[10px] font-semibold text-slate-300" style={{ fontVariantNumeric: "tabular-nums" }}>
-                      {c.passed}/{c.total}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+            <CategoryBars data={categoryStats} />
           </motion.div>
         </div>
       </motion.div>

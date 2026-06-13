@@ -9,14 +9,37 @@ export interface RecentAction {
 
 const META_KEY = "opencode_meta";
 
+export function computeStreak(checkins: string[]): number {
+  if (checkins.length === 0) return 0;
+  const today = new Date().toISOString().split("T")[0];
+  if (checkins[0] !== today && checkins[0] !== yesterday()) return 0;
+  let streak = 0;
+  const d = new Date();
+  while (true) {
+    const key = d.toISOString().split("T")[0];
+    if (checkins.includes(key)) {
+      streak++;
+      d.setDate(d.getDate() - 1);
+    } else break;
+  }
+  return streak;
+}
+
+function yesterday(): string {
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  return d.toISOString().split("T")[0];
+}
+
 interface MetaData {
   recentActions: RecentAction[];
   exerciseAttempts: [string, number][];
   lastActiveDate: string | null;
+  dailyCheckins: string[];
 }
 
 function defaultMeta(): MetaData {
-  return { recentActions: [], exerciseAttempts: [], lastActiveDate: null };
+  return { recentActions: [], exerciseAttempts: [], lastActiveDate: null, dailyCheckins: [] };
 }
 
 function loadMeta(): MetaData {
@@ -40,6 +63,8 @@ interface ProgressState {
   recentActions: RecentAction[];
   exerciseAttempts: Map<string, number>;
   lastActiveDate: string | null;
+  dailyCheckins: string[];
+  streak: number;
   initialized: boolean;
   init: () => Promise<void>;
   markConceptComplete: (conceptKey: string, label?: string) => void;
@@ -56,10 +81,10 @@ function pushAction(actions: RecentAction[], action: RecentAction): RecentAction
   return [action, ...actions].slice(0, 20);
 }
 
-function updateStreak(lastActiveDate: string | null): string | null {
+function recordActivity(dailyCheckins: string[]): { dailyCheckins: string[]; lastActiveDate: string; streak: number } {
   const today = new Date().toISOString().split("T")[0];
-  if (lastActiveDate === today) return today;
-  return today;
+  const next = dailyCheckins[0] === today ? dailyCheckins : [today, ...dailyCheckins].slice(0, 60);
+  return { dailyCheckins: next, lastActiveDate: today, streak: computeStreak(next) };
 }
 
 export const useProgressStore = create<ProgressState>((set, get) => ({
@@ -69,6 +94,8 @@ export const useProgressStore = create<ProgressState>((set, get) => ({
   recentActions: [],
   exerciseAttempts: new Map(),
   lastActiveDate: null,
+  dailyCheckins: [],
+  streak: 0,
   initialized: false,
 
   init: async () => {
@@ -82,19 +109,21 @@ export const useProgressStore = create<ProgressState>((set, get) => ({
       recentActions: meta.recentActions,
       exerciseAttempts: new Map(meta.exerciseAttempts),
       lastActiveDate: meta.lastActiveDate,
+      dailyCheckins: meta.dailyCheckins ?? [],
+      streak: computeStreak(meta.dailyCheckins ?? []),
       initialized: true,
     });
   },
 
   markConceptComplete: (key, label) => {
     const next = new Set(get().completedConcepts).add(key);
-    const lastActiveDate = updateStreak(get().lastActiveDate);
+    const { dailyCheckins, lastActiveDate, streak } = recordActivity(get().dailyCheckins);
     const recentActions = pushAction(get().recentActions, {
       type: "concept",
       label: label ?? `Concept ${key} completed`,
       timestamp: Date.now(),
     });
-    set({ completedConcepts: next, recentActions, lastActiveDate });
+    set({ completedConcepts: next, recentActions, lastActiveDate, dailyCheckins, streak });
     const state = get();
     saveProgress({
       completed_concepts: [...state.completedConcepts],
@@ -105,12 +134,13 @@ export const useProgressStore = create<ProgressState>((set, get) => ({
       recentActions,
       exerciseAttempts: [...state.exerciseAttempts.entries()],
       lastActiveDate,
+      dailyCheckins: state.dailyCheckins,
     });
   },
 
   markExercisePassed: (id) => {
     const next = new Set(get().passedExercises).add(id);
-    const lastActiveDate = updateStreak(get().lastActiveDate);
+    const { dailyCheckins, lastActiveDate, streak } = recordActivity(get().dailyCheckins);
     const recentActions = pushAction(get().recentActions, {
       type: "exercise",
       label: `Exercise "${id}" passed`,
@@ -118,7 +148,7 @@ export const useProgressStore = create<ProgressState>((set, get) => ({
     });
     const attempts = new Map(get().exerciseAttempts);
     attempts.set(id, (attempts.get(id) ?? 0) + 1);
-    set({ passedExercises: next, recentActions, lastActiveDate, exerciseAttempts: attempts });
+    set({ passedExercises: next, recentActions, lastActiveDate, exerciseAttempts: attempts, dailyCheckins, streak });
     const state = get();
     saveProgress({
       completed_concepts: [...state.completedConcepts],
@@ -129,6 +159,7 @@ export const useProgressStore = create<ProgressState>((set, get) => ({
       recentActions,
       exerciseAttempts: [...state.exerciseAttempts.entries()],
       lastActiveDate,
+      dailyCheckins: state.dailyCheckins,
     });
   },
 
@@ -141,18 +172,19 @@ export const useProgressStore = create<ProgressState>((set, get) => ({
       recentActions: state.recentActions,
       exerciseAttempts: [...attempts.entries()],
       lastActiveDate: state.lastActiveDate,
+      dailyCheckins: state.dailyCheckins,
     });
   },
 
   setQuizScore: (key, score) => {
     const next = new Map(get().quizScores).set(key, score);
-    const lastActiveDate = updateStreak(get().lastActiveDate);
+    const { dailyCheckins, lastActiveDate, streak } = recordActivity(get().dailyCheckins);
     const recentActions = pushAction(get().recentActions, {
       type: "quiz",
       label: score >= 80 ? `Quiz aced on concept ${key}` : `Quiz score: ${score}% on concept ${key}`,
       timestamp: Date.now(),
     });
-    set({ quizScores: next, recentActions, lastActiveDate });
+    set({ quizScores: next, recentActions, lastActiveDate, dailyCheckins, streak });
     const state = get();
     saveProgress({
       completed_concepts: [...state.completedConcepts],
@@ -163,6 +195,7 @@ export const useProgressStore = create<ProgressState>((set, get) => ({
       recentActions,
       exerciseAttempts: [...state.exerciseAttempts.entries()],
       lastActiveDate,
+      dailyCheckins: state.dailyCheckins,
     });
   },
 

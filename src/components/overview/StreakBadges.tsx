@@ -1,6 +1,8 @@
 import { Flame, Award, Target, Zap, Star, TrendingUp, Trophy } from "lucide-react";
+import WidgetCard from "./WidgetCard";
 
 interface StreakBadgesProps {
+  streak: number;
   lastActiveDate: string | null;
   courseStats: { id: number; done: number; total: number }[];
   passedExercises: Set<string>;
@@ -12,21 +14,6 @@ interface Badge {
   label: string;
   earned: boolean;
   color: string;
-}
-
-function computeStreak(lastActiveDate: string | null): number {
-  if (!lastActiveDate) return 0;
-  const today = new Date().toISOString().split("T")[0];
-  if (lastActiveDate !== today) return 0;
-  // Simple: count backwards from today
-  let count = 1;
-  const d = new Date();
-  for (let i = 1; i < 30; i++) {
-    d.setDate(d.getDate() - 1);
-    // We only know the last active date, so we can't verify past days
-    // Just return 1 for now - a real streak tracker would store daily check-ins
-  }
-  return count;
 }
 
 function getBadges(
@@ -49,21 +36,21 @@ function getBadges(
   ];
 }
 
-export default function StreakBadges({ lastActiveDate, courseStats, passedExercises, quizScores }: StreakBadgesProps) {
-  const streak = computeStreak(lastActiveDate);
+export default function StreakBadges({ streak, lastActiveDate, courseStats, passedExercises, quizScores }: StreakBadgesProps) {
   const badges = getBadges(courseStats, passedExercises, quizScores);
 
   return (
-    <div className="glass-panel rounded-xl h-full" style={{ padding: "22px 26px" }}>
-      <div className="flex items-center gap-3 mb-4">
-        <div className="flex items-center gap-2">
-          <Flame size={16} className={streak > 0 ? "text-amber-400" : "text-slate-600"} />
-          <span className="text-sm font-semibold text-white">
-            {streak > 0 ? `${streak} day streak` : "No streak"}
-          </span>
-        </div>
+    <WidgetCard title="Streak & achievements" icon={<Flame size={14} />}>
+      <div className="flex items-center gap-2 mb-3">
+        <Flame
+          size={18}
+          className={lastActiveDate ? "text-amber-400" : "text-slate-600"}
+        />
+        <span className="text-sm font-semibold text-white">
+          {streak > 0 ? `${streak} day streak` : lastActiveDate ? "Active today" : "No activity today"}
+        </span>
       </div>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 justify-center">
         {badges.map((b) => {
           const Icon = b.icon;
           return (
@@ -88,6 +75,6 @@ export default function StreakBadges({ lastActiveDate, courseStats, passedExerci
           );
         })}
       </div>
-    </div>
+    </WidgetCard>
   );
 }

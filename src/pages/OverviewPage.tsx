@@ -11,6 +11,8 @@ import ConceptTree from "@/components/overview/ConceptTree";
 import ContinueCard from "@/components/overview/ContinueCard";
 import RecentActivity from "@/components/overview/RecentActivity";
 import StreakBadges from "@/components/overview/StreakBadges";
+import DifficultyDonut from "@/components/overview/DifficultyDonut";
+import CategoryBars from "@/components/overview/CategoryBars";
 
 const DIFF_COLORS: Record<string, string> = {
   beginner: "#34d399",
@@ -62,96 +64,9 @@ function RadialGauge({ pct }: { pct: number }) {
   );
 }
 
-function DifficultyDonut({ data }: { data: Array<{ label: string; passed: number; total: number; color: string }> }) {
-  const R = 58;
-  const C = 2 * Math.PI * R;
-  const totalPassed = data.reduce((s, d) => s + d.passed, 0);
-  let acc = 0;
-  return (
-    <div className="flex items-center gap-7">
-      <div className="relative" style={{ width: 150, height: 150 }}>
-        <svg width={150} height={150} viewBox="0 0 150 150" style={{ transform: "rotate(-90deg)" }}>
-          <circle cx={75} cy={75} r={R} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth={14} />
-          {data.map((d) => {
-            const frac = totalPassed > 0 ? d.passed / totalPassed : 0;
-            const seg = (
-              <motion.circle
-                key={d.label}
-                cx={75}
-                cy={75}
-                r={R}
-                fill="none"
-                stroke={d.color}
-                strokeWidth={14}
-                strokeDasharray={`${C * frac} ${C}`}
-                initial={{ strokeDashoffset: C * 0.25 - acc * C + C * frac }}
-                animate={{ strokeDashoffset: -acc * C }}
-                transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-                opacity={frac === 0 ? 0 : 1}
-              />
-            );
-            acc += frac;
-            return seg;
-          })}
-        </svg>
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-2xl font-bold text-white">{totalPassed}</span>
-          <span className="text-[10px] text-slate-500">passed</span>
-        </div>
-      </div>
-      <div className="flex flex-col gap-3">
-        {data.map((d) => (
-          <div key={d.label} className="flex items-center gap-2.5">
-            <span
-              className="w-2.5 h-2.5 rounded-full"
-              style={{ background: d.color, boxShadow: `0 0 8px ${d.color}66` }}
-            />
-            <span className="text-xs text-slate-300 capitalize w-24">{d.label}</span>
-            <span className="text-xs font-semibold text-white tabular-nums">
-              {d.passed}/{d.total}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function CategoryBars({ data }: { data: Array<{ label: string; passed: number; total: number }> }) {
-  return (
-    <div className="flex items-end justify-between gap-4" style={{ height: 130 }}>
-      {data.map((c, i) => {
-        const pct = c.total ? (c.passed / c.total) * 100 : 0;
-        return (
-          <div key={c.label} className="flex-1 flex flex-col items-center gap-2 h-full">
-            <div className="flex-1 w-full max-w-[44px] flex flex-col justify-end rounded-lg overflow-hidden" style={{ background: "rgba(255,255,255,0.05)" }}>
-              <motion.div
-                className="w-full rounded-lg"
-                style={{
-                  background: "linear-gradient(180deg, #67e8f9, #6366f1)",
-                  boxShadow: "0 0 12px rgba(103,232,249,0.3)",
-                }}
-                initial={{ height: 0 }}
-                animate={{ height: `${Math.max(pct, c.passed > 0 ? 8 : 0)}%` }}
-                transition={{ duration: 0.9, delay: 0.25 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-              />
-            </div>
-            <span className="text-[10px] text-slate-500 text-center leading-tight" style={{ maxWidth: 90 }}>
-              {c.label}
-            </span>
-            <span className="text-[10px] font-semibold text-slate-300 tabular-nums">
-              {c.passed}/{c.total}
-            </span>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
 export default function OverviewPage() {
   const { courses, setCourses, setCoursesLoading } = useAppStore();
-  const { completedConcepts, passedExercises, quizScores, recentActions, lastActiveDate } = useProgressStore();
+  const { completedConcepts, passedExercises, quizScores, recentActions, streak, lastActiveDate } = useProgressStore();
 
   useEffect(() => {
     if (courses.length > 0) return;
@@ -241,8 +156,8 @@ export default function OverviewPage() {
         variants={staggerContainer}
         initial="initial"
         animate="animate"
-        className="w-full flex flex-col gap-6"
-        style={{ maxWidth: 1080, padding: "36px 40px 64px" }}
+        className="w-full flex flex-col gap-5"
+        style={{ maxWidth: 1080, padding: "32px 40px 64px" }}
       >
         {/* Header */}
         <motion.div variants={staggerItem}>
@@ -253,18 +168,16 @@ export default function OverviewPage() {
         {/* Stat tiles */}
         <motion.div variants={staggerItem} className="grid grid-cols-4 gap-4">
           {tiles.map(({ icon: Icon, label, value, sub, color }) => (
-            <div key={label} className="glass-panel rounded-xl flex flex-col gap-3" style={{ padding: "18px 20px" }}>
+            <div key={label} className="glass-panel rounded-xl flex flex-col gap-3" style={{ padding: "16px 18px" }}>
               <div
-                className="w-9 h-9 rounded-lg flex items-center justify-center"
+                className="w-8 h-8 rounded-lg flex items-center justify-center"
                 style={{ background: `${color}1f`, border: `1px solid ${color}40`, color }}
               >
-                <Icon size={16} />
+                <Icon size={15} />
               </div>
               <div>
                 <div className="flex items-baseline gap-1.5">
-                  <span className="text-2xl font-bold text-white tabular-nums">
-                    {value}
-                  </span>
+                  <span className="text-xl font-bold text-white tabular-nums">{value}</span>
                   <span className="text-xs text-slate-500">{sub}</span>
                 </div>
                 <span className="text-xs text-slate-400">{label}</span>
@@ -274,11 +187,11 @@ export default function OverviewPage() {
         </motion.div>
 
         {/* Gauge + Continue card */}
-        <div className="grid gap-4 items-stretch" style={{ gridTemplateColumns: "320px 1fr" }}>
+        <div className="grid gap-4 items-stretch" style={{ gridTemplateColumns: "280px 1fr" }}>
           <motion.div
             variants={staggerItem}
             className="glass-panel rounded-xl flex flex-col items-center justify-center"
-            style={{ padding: 24 }}
+            style={{ padding: 20 }}
           >
             <RadialGauge pct={overallPct} />
           </motion.div>
@@ -302,8 +215,7 @@ export default function OverviewPage() {
           <motion.div variants={staggerItem} className="h-full">
             <RecentActivity actions={recentActions} />
           </motion.div>
-          <motion.div variants={staggerItem} className="glass-panel rounded-xl h-full" style={{ padding: "22px 26px" }}>
-            <h3 className="text-sm font-semibold text-white mb-5">Exercises by difficulty</h3>
+          <motion.div variants={staggerItem} className="h-full">
             <DifficultyDonut data={difficultyData} />
           </motion.div>
         </div>
@@ -312,14 +224,14 @@ export default function OverviewPage() {
         <div className="grid gap-4 items-stretch" style={{ gridTemplateColumns: "1fr 1fr" }}>
           <motion.div variants={staggerItem} className="h-full">
             <StreakBadges
+              streak={streak}
               lastActiveDate={lastActiveDate}
               courseStats={courseStats}
               passedExercises={passedExercises}
               quizScores={quizScores}
             />
           </motion.div>
-          <motion.div variants={staggerItem} className="glass-panel rounded-xl h-full" style={{ padding: "22px 26px" }}>
-            <h3 className="text-sm font-semibold text-white mb-5">Exercise categories</h3>
+          <motion.div variants={staggerItem} className="h-full">
             <CategoryBars data={categoryStats} />
           </motion.div>
         </div>

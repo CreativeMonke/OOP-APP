@@ -9,7 +9,7 @@ export function getLayoutedElements(
   rankSep = 100,
   edgeSep = 20,
 ): { nodes: Node[]; edges: Edge[] } {
-  const g = new Graph();
+  const g = new Graph({ directed: true });
   g.setGraph({
     rankdir: direction,
     nodesep: nodeSep,
@@ -20,23 +20,20 @@ export function getLayoutedElements(
   });
   g.setDefaultEdgeLabel(() => ({}));
 
-  function dims(type: string | undefined): { w: number; h: number } {
-    switch (type) {
-      case "root":
-        return { w: 140, h: 44 };
-      case "concept":
-        return { w: 150, h: 30 };
-      default:
-        return { w: 170, h: 56 };
-    }
-  }
+  console.debug(
+    "[dagre] nodes:", nodes.length,
+    "edges:", edges.length,
+    "sample:", edges.slice(0, 3).map((e) => `${e.source}→${e.target}`),
+  );
 
   nodes.forEach((node) => {
-    const d = dims(node.type);
-    g.setNode(node.id, {
-      width: node.width ?? d.w,
-      height: node.height ?? d.h,
-    });
+    let width = 170;
+    let height = 56;
+
+    if (node.type === "root") { width = 140; height = 44; }
+    if (node.type === "concept") { width = 150; height = 32; }
+
+    g.setNode(node.id, { width, height });
   });
 
   edges.forEach((edge) => {
@@ -47,12 +44,17 @@ export function getLayoutedElements(
 
   const layoutedNodes = nodes.map((node) => {
     const dagreNode = g.node(node.id);
-    const d = dims(node.type);
+
+    let w = 170;
+    let h = 56;
+    if (node.type === "root") { w = 140; h = 44; }
+    if (node.type === "concept") { w = 150; h = 32; }
+
     return {
       ...node,
       position: {
-        x: dagreNode.x - (node.width ?? d.w) / 2,
-        y: dagreNode.y - (node.height ?? d.h) / 2,
+        x: dagreNode.x - w / 2,
+        y: dagreNode.y - h / 2,
       },
     };
   });

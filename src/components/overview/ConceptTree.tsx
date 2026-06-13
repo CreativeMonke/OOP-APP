@@ -68,14 +68,14 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
       const stats = courseStats.find((s) => s.id === c.id);
       const done = stats?.done ?? 0;
       const total = stats?.total ?? c.concepts.length;
-      const nid = `c-${c.id}`;
+      const courseNodeId = `course-${c.id}`;
       const nextCi =
         nextConcept !== null && nextConcept.courseId === c.id
           ? nextConcept.conceptIndex
           : null;
 
       nodeList.push({
-        id: nid,
+        id: courseNodeId,
         type: "course",
         position: { x: 0, y: 0 },
         data: {
@@ -92,9 +92,9 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
       });
 
       edgeList.push({
-        id: `e-root-cpp-oop-${nid}`,
+        id: `e-root-cpp-oop-${courseNodeId}`,
         source: "root-cpp-oop",
-        target: nid,
+        target: courseNodeId,
         sourceHandle: "right",
         targetHandle: "left",
         type: "smoothstep",
@@ -113,7 +113,7 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
       const course = courses.find((c) => c.id === expandedCourseId);
       if (course) {
         course.concepts.forEach((concept, ci) => {
-          const cid = `cpt-${expandedCourseId}-${ci}`;
+          const conceptNodeId = `concept-${expandedCourseId}-${ci}`;
           const ck = `${expandedCourseId}-${ci}`;
           const nxt =
             nextConcept !== null &&
@@ -121,7 +121,7 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
             nextConcept.conceptIndex === ci;
 
           nodeList.push({
-            id: cid,
+            id: conceptNodeId,
             type: "concept",
             position: { x: 0, y: 0 },
             data: {
@@ -135,9 +135,9 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
           });
 
           edgeList.push({
-            id: `e-c-${expandedCourseId}-${cid}`,
-            source: `c-${expandedCourseId}`,
-            target: cid,
+            id: `e-${expandedCourseId}-${conceptNodeId}`,
+            source: `course-${expandedCourseId}`,
+            target: conceptNodeId,
             sourceHandle: "right",
             targetHandle: "left",
             type: "smoothstep",

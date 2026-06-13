@@ -54,7 +54,8 @@ function ConceptNodeComponent({ data }: NodeProps<ConceptNodeType>) {
     >
       <Handle
         type="target"
-        position={Position.Top}
+        position={Position.Left}
+        id="left"
         style={{
           width: 0,
           height: 0,

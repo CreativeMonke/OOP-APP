@@ -44,8 +44,8 @@ function CourseNodeComponent({ data }: NodeProps<CourseNodeType>) {
     >
       <Handle
         type="target"
-        position={Position.Top}
-        id="top"
+        position={Position.Left}
+        id="left"
         style={{
           width: 0,
           height: 0,
@@ -85,7 +85,6 @@ function CourseNodeComponent({ data }: NodeProps<CourseNodeType>) {
         </div>
       </div>
 
-      {/* Mini concept progress dots */}
       <div className="flex items-center gap-[3px] mt-2">
         {conceptCompletions.map((comp, i) => (
           <div
@@ -120,8 +119,8 @@ function CourseNodeComponent({ data }: NodeProps<CourseNodeType>) {
 
       <Handle
         type="source"
-        position={Position.Bottom}
-        id="bottom"
+        position={Position.Right}
+        id="right"
         style={{
           width: 0,
           height: 0,

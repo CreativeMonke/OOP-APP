@@ -12,7 +12,8 @@ function RootNodeComponent(_props: NodeProps<RootNodeType>) {
       style={{
         width: 140,
         height: 44,
-        background: "linear-gradient(135deg, rgba(129,140,248,0.25), rgba(103,232,249,0.12))",
+        background:
+          "linear-gradient(135deg, rgba(129,140,248,0.25), rgba(103,232,249,0.12))",
         border: "1px solid rgba(129,140,248,0.3)",
         borderRadius: 14,
         display: "flex",
@@ -33,7 +34,8 @@ function RootNodeComponent(_props: NodeProps<RootNodeType>) {
       <span>C++ OOP</span>
       <Handle
         type="source"
-        position={Position.Bottom}
+        position={Position.Right}
+        id="right"
         style={{
           width: 0,
           height: 0,

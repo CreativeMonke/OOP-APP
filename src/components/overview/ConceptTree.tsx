@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { Code2 } from "lucide-react";
 import { useProgressStore } from "@/store/useProgressStore";
 import { useAppStore } from "@/store/useAppStore";
+import { getLayoutedElements } from "@/lib/layout";
 import RootNodeComponent from "./RootNode";
 import CourseNodeComponent from "./CourseNode";
 import ConceptNodeComponent from "./ConceptNode";
@@ -31,24 +32,6 @@ const nodeTypes: NodeTypes = {
   course: CourseNodeComponent,
   concept: ConceptNodeComponent,
 };
-
-const ROOT_W = 140;
-const ROOT_H = 44;
-const COURSE_W = 170;
-const COURSE_H = 56;
-const CONCEPT_W = 150;
-const CONCEPT_H = 30;
-const ORBIT_R = 200;
-const CONCEPT_R_MIN = 85;
-const CONCEPT_R_MAX = 220;
-const SPREAD_DEG = 100;
-
-function rectsOverlap(
-  a: { x: number; y: number; w: number; h: number },
-  b: { x: number; y: number; w: number; h: number },
-) {
-  return !(a.x + a.w <= b.x || b.x + b.w <= a.x || a.y + a.h <= b.y || b.y + b.h <= a.y);
-}
 
 function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: ConceptTreeProps) {
   const navigate = useNavigate();
@@ -70,26 +53,6 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
     [navigate, setActiveCourse, setActiveConceptIndex],
   );
 
-  const rootCenter = useMemo(() => ({ x: 480, y: 310 }), []);
-
-  const courseAngles = useMemo(
-    () =>
-      courses.map((_, i) => ({
-        angle: (i / courses.length) * 2 * Math.PI - Math.PI / 2,
-        idx: i,
-      })),
-    [courses],
-  );
-
-  const courseCenters = useMemo(
-    () =>
-      courseAngles.map(({ angle }) => ({
-        x: rootCenter.x + ORBIT_R * Math.cos(angle),
-        y: rootCenter.y + ORBIT_R * Math.sin(angle),
-      })),
-    [courseAngles, rootCenter],
-  );
-
   const { nodes, edges } = useMemo(() => {
     const nodeList: Node[] = [];
     const edgeList: Edge[] = [];
@@ -97,158 +60,118 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
     nodeList.push({
       id: "root",
       type: "root",
-      position: { x: rootCenter.x - ROOT_W / 2, y: rootCenter.y - ROOT_H / 2 },
+      position: { x: 0, y: 0 },
       data: {},
     });
 
-    const expandedIdx = expandedCourseId !== null ? courses.findIndex((c) => c.id === expandedCourseId) : -1;
-
-    const otherRects: { x: number; y: number; w: number; h: number }[] = [];
-
-    courses.forEach((c, i) => {
-      const { x, y } = courseCenters[i];
+    courses.forEach((c) => {
       const stats = courseStats.find((s) => s.id === c.id);
       const done = stats?.done ?? 0;
       const total = stats?.total ?? c.concepts.length;
       const nid = `c-${c.id}`;
-      const nextCi = nextConcept !== null && nextConcept.courseId === c.id ? nextConcept.conceptIndex : null;
-
-      const px = x - COURSE_W / 2;
-      const py = y - COURSE_H / 2;
+      const nextCi =
+        nextConcept !== null && nextConcept.courseId === c.id
+          ? nextConcept.conceptIndex
+          : null;
 
       nodeList.push({
         id: nid,
         type: "course",
-        position: { x: px, y: py },
+        position: { x: 0, y: 0 },
         data: {
           courseId: c.id,
           title: c.title,
           pct: total ? (done / total) * 100 : 0,
-          conceptCompletions: c.concepts.map((_, ci) => completedConcepts.has(`${c.id}-${ci}`)),
+          conceptCompletions: c.concepts.map(
+            (_, ci) => completedConcepts.has(`${c.id}-${ci}`),
+          ),
           isExpanded: expandedCourseId === c.id,
           hasNext: nextCi,
           onToggle: () => toggleExpand(c.id),
         },
       });
 
-      otherRects.push({ x: px, y: py, w: COURSE_W, h: COURSE_H });
-
       edgeList.push({
         id: `e-root-${nid}`,
         source: "root",
         target: nid,
+        sourceHandle: "right",
+        targetHandle: "left",
         type: "smoothstep",
         style: {
-          stroke: nextCi !== null ? "rgba(129,140,248,0.22)" : "rgba(255,255,255,0.06)",
+          stroke:
+            nextCi !== null
+              ? "rgba(129,140,248,0.22)"
+              : "rgba(255,255,255,0.06)",
           strokeWidth: nextCi !== null ? 1.5 : 1,
         },
         animated: nextCi !== null,
       });
     });
 
-    let finalR = CONCEPT_R_MIN;
+    if (expandedCourseId !== null) {
+      const course = courses.find((c) => c.id === expandedCourseId);
+      if (course) {
+        course.concepts.forEach((concept, ci) => {
+          const cid = `cpt-${expandedCourseId}-${ci}`;
+          const ck = `${expandedCourseId}-${ci}`;
+          const nxt =
+            nextConcept !== null &&
+            nextConcept.courseId === expandedCourseId &&
+            nextConcept.conceptIndex === ci;
 
-    if (expandedIdx !== -1) {
-      const course = courses[expandedIdx];
-      const { angle } = courseAngles[expandedIdx];
-      const ctr = courseCenters[expandedIdx];
-      const N = course.concepts.length;
-
-      for (let r = CONCEPT_R_MIN; r <= CONCEPT_R_MAX; r += 10) {
-        const conceptRects: { x: number; y: number }[] = [];
-        for (let k = 0; k < N; k++) {
-          const spreadRad = (SPREAD_DEG * Math.PI) / 180;
-          const ca = angle - spreadRad / 2 + (k / (Math.max(N - 1, 1))) * spreadRad;
-          conceptRects.push({
-            x: ctr.x + r * Math.cos(ca) - CONCEPT_W / 2,
-            y: ctr.y + r * Math.sin(ca) - CONCEPT_H / 2,
+          nodeList.push({
+            id: cid,
+            type: "concept",
+            position: { x: 0, y: 0 },
+            data: {
+              conceptIndex: ci,
+              name: concept.name,
+              completed: completedConcepts.has(ck),
+              isNext: nxt,
+              isWeak: weakConcepts.has(ck),
+              onClick: () => handleConceptClick(expandedCourseId, ci),
+            },
           });
-        }
 
-        let collision = false;
-        for (let k = 0; k < N && !collision; k++) {
-          const cr = conceptRects[k];
-          for (const or of otherRects) {
-            if (rectsOverlap({ ...cr, w: CONCEPT_W, h: CONCEPT_H }, or)) {
-              collision = true;
-              break;
-            }
-          }
-          if (!collision) {
-            for (let j = 0; j < k; j++) {
-              if (rectsOverlap({ ...cr, w: CONCEPT_W, h: CONCEPT_H }, { ...conceptRects[j], w: CONCEPT_W, h: CONCEPT_H })) {
-                collision = true;
-                break;
-              }
-            }
-          }
-        }
-
-        if (!collision) {
-          finalR = r;
-          break;
-        }
+          edgeList.push({
+            id: `e-c-${expandedCourseId}-${cid}`,
+            source: `c-${expandedCourseId}`,
+            target: cid,
+            sourceHandle: "right",
+            targetHandle: "left",
+            type: "smoothstep",
+            style: {
+              stroke: completedConcepts.has(ck)
+                ? "rgba(52,211,153,0.18)"
+                : nxt
+                  ? "rgba(129,140,248,0.28)"
+                  : "rgba(255,255,255,0.05)",
+              strokeWidth: 1,
+            },
+            animated: nxt,
+          });
+        });
       }
-
-      const spreadRad = (SPREAD_DEG * Math.PI) / 180;
-      course.concepts.forEach((concept, ci) => {
-        const ca = angle - spreadRad / 2 + (ci / (Math.max(N - 1, 1))) * spreadRad;
-        const cid = `cpt-${expandedCourseId}-${ci}`;
-        const ck = `${expandedCourseId}-${ci}`;
-        const nxt = nextConcept !== null && nextConcept.courseId === expandedCourseId && nextConcept.conceptIndex === ci;
-
-        nodeList.push({
-          id: cid,
-          type: "concept",
-          position: {
-            x: ctr.x + finalR * Math.cos(ca) - CONCEPT_W / 2,
-            y: ctr.y + finalR * Math.sin(ca) - CONCEPT_H / 2,
-          },
-          data: {
-            conceptIndex: ci,
-            name: concept.name,
-            completed: completedConcepts.has(ck),
-            isNext: nxt,
-            isWeak: weakConcepts.has(ck),
-            onClick: () => handleConceptClick(expandedCourseId!, ci),
-          },
-        });
-
-        edgeList.push({
-          id: `e-c-${expandedCourseId}-${cid}`,
-          source: `c-${expandedCourseId}`,
-          target: cid,
-          type: "default",
-          style: {
-            stroke: completedConcepts.has(ck)
-              ? "rgba(52,211,153,0.18)"
-              : nxt
-                ? "rgba(129,140,248,0.28)"
-                : "rgba(255,255,255,0.05)",
-            strokeWidth: 1,
-          },
-          animated: nxt,
-        });
-      });
     }
 
-    return { nodes: nodeList, edges: edgeList };
-  }, [courses, courseStats, expandedCourseId, nextConcept, weakConcepts, completedConcepts, toggleExpand, handleConceptClick, rootCenter, courseAngles, courseCenters]);
+    return getLayoutedElements(nodeList, edgeList);
+  }, [courses, courseStats, expandedCourseId, nextConcept, weakConcepts, completedConcepts, toggleExpand, handleConceptClick]);
 
   useEffect(() => {
-    if (expandedCourseId !== null && rf) {
-      const t = setTimeout(() => rf.fitView({ duration: 350, padding: 0.3 }), 60);
+    if (rf) {
+      const t = setTimeout(
+        () => rf.fitView({ padding: 0.2, duration: 200 }),
+        60,
+      );
       return () => clearTimeout(t);
     }
-  }, [expandedCourseId, rf]);
+  }, [nodes.length, expandedCourseId, rf]);
 
   return (
     <div
       className="glass-panel rounded-xl overflow-hidden"
-      style={{
-        height: 560,
-        transition: "height 0.35s cubic-bezier(0.22, 1, 0.36, 1)",
-      }}
+      style={{ height: 520 }}
     >
       <div className="px-4 pt-3 pb-1 flex items-center justify-between pointer-events-none">
         <div className="flex items-center gap-2">
@@ -256,7 +179,9 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
           <h3 className="text-sm font-semibold text-white">Concept tree</h3>
         </div>
         <span className="text-[10px] text-slate-500">
-          {expandedCourseId !== null ? "click course to collapse" : "click a course to expand"}
+          {expandedCourseId !== null
+            ? "click course to collapse"
+            : "click a course to expand"}
         </span>
       </div>
       <ReactFlow

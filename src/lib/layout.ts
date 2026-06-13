@@ -1,12 +1,6 @@
 import { Graph, layout } from "@dagrejs/dagre";
 import type { Node, Edge } from "@xyflow/react";
 
-const DIMENSIONS: Record<string, { w: number; h: number }> = {
-  root: { w: 140, h: 44 },
-  course: { w: 170, h: 56 },
-  concept: { w: 150, h: 30 },
-};
-
 export function getLayoutedElements(
   nodes: Node[],
   edges: Edge[],
@@ -26,9 +20,23 @@ export function getLayoutedElements(
   });
   g.setDefaultEdgeLabel(() => ({}));
 
+  function dims(type: string | undefined): { w: number; h: number } {
+    switch (type) {
+      case "root":
+        return { w: 140, h: 44 };
+      case "concept":
+        return { w: 150, h: 30 };
+      default:
+        return { w: 170, h: 56 };
+    }
+  }
+
   nodes.forEach((node) => {
-    const dim = DIMENSIONS[node.type ?? "concept"] ?? DIMENSIONS.concept;
-    g.setNode(node.id, { width: dim.w, height: dim.h });
+    const d = dims(node.type);
+    g.setNode(node.id, {
+      width: node.width ?? d.w,
+      height: node.height ?? d.h,
+    });
   });
 
   edges.forEach((edge) => {
@@ -39,12 +47,12 @@ export function getLayoutedElements(
 
   const layoutedNodes = nodes.map((node) => {
     const dagreNode = g.node(node.id);
-    const dim = DIMENSIONS[node.type ?? "concept"] ?? DIMENSIONS.concept;
+    const d = dims(node.type);
     return {
       ...node,
       position: {
-        x: dagreNode.x - dim.w / 2,
-        y: dagreNode.y - dim.h / 2,
+        x: dagreNode.x - (node.width ?? d.w) / 2,
+        y: dagreNode.y - (node.height ?? d.h) / 2,
       },
     };
   });

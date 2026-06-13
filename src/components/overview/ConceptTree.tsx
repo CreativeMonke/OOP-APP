@@ -58,7 +58,7 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
     const edgeList: Edge[] = [];
 
     nodeList.push({
-      id: "root",
+      id: "root-cpp-oop",
       type: "root",
       position: { x: 0, y: 0 },
       data: {},
@@ -92,8 +92,8 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
       });
 
       edgeList.push({
-        id: `e-root-${nid}`,
-        source: "root",
+        id: `e-root-cpp-oop-${nid}`,
+        source: "root-cpp-oop",
         target: nid,
         sourceHandle: "right",
         targetHandle: "left",

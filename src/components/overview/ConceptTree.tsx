@@ -159,12 +159,8 @@ function ConceptTreeFlow({ courses, courseStats, nextConcept, weakConcepts }: Co
   }, [courses, courseStats, expandedCourseId, nextConcept, weakConcepts, completedConcepts, toggleExpand, handleConceptClick]);
 
   useEffect(() => {
-    if (rf) {
-      const t = setTimeout(
-        () => rf.fitView({ padding: 0.2, duration: 200 }),
-        60,
-      );
-      return () => clearTimeout(t);
+    if (rf && nodes.length > 0) {
+      rf.fitView({ padding: 0.2, duration: 300 });
     }
   }, [nodes.length, expandedCourseId, rf]);
 

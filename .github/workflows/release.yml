@@ -9,8 +9,16 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-release:
-    runs-on: macos-latest
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+        include:
+          - os: macos-latest
+            bundle-suffix: dmg
+          - os: windows-latest
+            bundle-suffix: exe
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: write
 
@@ -24,20 +32,61 @@ jobs:
 
       - run: npm ci
 
-      - name: Build Tauri app & create release
+      - name: Build Tauri app
         id: tauri_build
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: v__VERSION__
-          releaseName: "OOP Academy v__VERSION__"
-          releaseBody: "Automated build from main branch."
-          releaseDraft: false
+          createRelease: false
+
+      - name: Upload bundle artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: OOP_Academy-${{ matrix.os }}-${{ matrix.bundle-suffix }}
+          path: |
+            src-tauri/target/release/bundle/dmg/*.dmg
+            src-tauri/target/release/bundle/msi/*.msi
+            src-tauri/target/release/bundle/nsis/*.exe
+          if-no-files-found: warn
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get version
+        id: version
+        run: echo "tag=$(node -p "require('./src-tauri/tauri.conf.json').version")" >> $GITHUB_OUTPUT
+
+      - uses: actions/download-artifact@v4
+
+      - name: Create release & upload assets
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.tag }}
+          name: OOP Academy v${{ steps.version.outputs.tag }}
+          body: Automated build from main branch.
+          files: OOP_Academy-*/
+          draft: false
           prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  bump:
+    needs: release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
 
       - name: Bump version for next iteration
-        if: success()
         run: |
           VERSION=$(node -p "require('./src-tauri/tauri.conf.json').version")
           IFS='.' read -ra PARTS <<< "$VERSION"
@@ -50,6 +99,7 @@ jobs:
             c.version = '$NEW_VERSION';
             fs.writeFileSync(p, JSON.stringify(c, null, 2) + '\n');
           "
+
           sed -i "s/^version = \".*\"/version = \"$NEW_VERSION\"/" src-tauri/Cargo.toml
 
           git config user.name "github-actions[bot]"

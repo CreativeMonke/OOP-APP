@@ -52,17 +52,23 @@ function ConceptNodeComponent({ data }: NodeProps<ConceptNodeType>) {
         e.currentTarget.style.transform = "translateX(0)";
       }}
     >
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="left"
-        style={{
-          width: 0,
-          height: 0,
-          background: "transparent",
-          border: "none",
-        }}
-      />
+      {(["top", "right", "bottom", "left"] as const).map((side) => (
+        <Handle
+          key={`t-${side}`}
+          type="target"
+          id={`t-${side}`}
+          position={
+            side === "top"
+              ? Position.Top
+              : side === "right"
+                ? Position.Right
+                : side === "bottom"
+                  ? Position.Bottom
+                  : Position.Left
+          }
+          style={{ width: 0, height: 0, background: "transparent", border: "none", minWidth: 0, minHeight: 0 }}
+        />
+      ))}
       <div
         className="w-4 h-4 rounded flex items-center justify-center text-[8px] font-bold shrink-0"
         style={{

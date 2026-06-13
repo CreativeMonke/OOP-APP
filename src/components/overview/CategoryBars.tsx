@@ -9,7 +9,7 @@ interface Props {
 export default function CategoryBars({ data }: Props) {
   return (
     <WidgetCard title="Exercise categories" icon={<BarChart3 size={14} />} bodyClassName="items-end">
-      <div className="flex items-end justify-between gap-3 w-full" style={{ height: 110 }}>
+      <div className="flex items-end justify-between gap-3 w-full" style={{ height: 135 }}>
         {data.map((c, i) => {
           const pct = c.total ? (c.passed / c.total) * 100 : 0;
           return (
@@ -28,7 +28,7 @@ export default function CategoryBars({ data }: Props) {
                   transition={{ duration: 0.9, delay: 0.25 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
                 />
               </div>
-              <span className="text-[9px] text-slate-500 text-center leading-tight" style={{ maxWidth: 80 }}>
+              <span className="text-[9px] text-slate-500 text-center leading-tight">
                 {c.label}
               </span>
               <span className="text-[9px] font-semibold text-slate-300 tabular-nums">

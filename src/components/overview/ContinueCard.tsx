@@ -33,13 +33,13 @@ export default function ContinueCard({ nextConcept }: ContinueCardProps) {
       icon={<ArrowRight size={14} />}
       action={{ label: "Resume learning", onClick: handleContinue }}
     >
-      <div className="flex items-center gap-3 w-full max-w-xs">
+      <div className="flex items-center gap-4 w-full justify-start px-2">
         <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
           style={{ background: "rgba(129,140,248,0.12)", color: "#818cf8" }}
         >
           <span className="text-xs font-bold">{nextConcept.courseId}</span>
         </div>
-        <div className="flex-1 min-w-0 text-center">
+        <div className="flex-1 min-w-0">
           <div className="text-xs text-slate-300 truncate">{nextConcept.courseTitle}</div>
           <div className="text-[11px] text-slate-500 truncate">
             <span className="font-mono text-slate-600">{nextConcept.conceptIndex + 1}. </span>

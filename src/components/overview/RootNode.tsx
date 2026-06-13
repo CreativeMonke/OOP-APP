@@ -32,17 +32,23 @@ function RootNodeComponent(_props: NodeProps<RootNodeType>) {
     >
       <Code2 size={16} className="text-indigo-400" />
       <span>C++ OOP</span>
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="right"
-        style={{
-          width: 0,
-          height: 0,
-          background: "transparent",
-          border: "none",
-        }}
-      />
+      {(["top", "right", "bottom", "left"] as const).map((side) => (
+        <Handle
+          key={`s-${side}`}
+          type="source"
+          id={`s-${side}`}
+          position={
+            side === "top"
+              ? Position.Top
+              : side === "right"
+                ? Position.Right
+                : side === "bottom"
+                  ? Position.Bottom
+                  : Position.Left
+          }
+          style={{ width: 0, height: 0, background: "transparent", border: "none", minWidth: 0, minHeight: 0 }}
+        />
+      ))}
     </div>
   );
 }

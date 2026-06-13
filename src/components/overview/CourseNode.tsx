@@ -42,17 +42,23 @@ function CourseNodeComponent({ data }: NodeProps<CourseNodeType>) {
       }}
       onClick={onToggle}
     >
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="left"
-        style={{
-          width: 0,
-          height: 0,
-          background: "transparent",
-          border: "none",
-        }}
-      />
+      {(["top", "right", "bottom", "left"] as const).map((side) => {
+        const pos =
+          side === "top"
+            ? Position.Top
+            : side === "right"
+              ? Position.Right
+              : side === "bottom"
+                ? Position.Bottom
+                : Position.Left;
+        const hidden = { width: 0, height: 0, background: "transparent", border: "none", minWidth: 0, minHeight: 0 } as const;
+        return (
+          <span key={side}>
+            <Handle type="target" id={`t-${side}`} position={pos} style={hidden} />
+            <Handle type="source" id={`s-${side}`} position={pos} style={hidden} />
+          </span>
+        );
+      })}
       <div className="flex items-center gap-2">
         <div
           className="w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold shrink-0"
@@ -117,17 +123,6 @@ function CourseNodeComponent({ data }: NodeProps<CourseNodeType>) {
         ))}
       </div>
 
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="right"
-        style={{
-          width: 0,
-          height: 0,
-          background: "transparent",
-          border: "none",
-        }}
-      />
     </div>
   );
 }
